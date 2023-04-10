@@ -4,6 +4,8 @@ import Visita from "../models/visita";
 const insertarVisita =async (visita:VisitaInterface,userId:Number) => {
     const {
         tipo,
+        puesto,
+        nombre,
         dpi,
         colaborador,
         proveniente,
@@ -15,6 +17,8 @@ const insertarVisita =async (visita:VisitaInterface,userId:Number) => {
 
     const respuesta = await Visita.create({
         tipo:tipo,
+        puesto:puesto,
+        nombre:nombre,
         dpi:dpi,
         colaborador:colaborador,
         proveniente:proveniente,
@@ -30,6 +34,8 @@ const insertarVisita =async (visita:VisitaInterface,userId:Number) => {
 const actualizarVisita =async (id:any,visita:VisitaInterface) => {
     const {
         tipo,
+        puesto,
+        nombre,
         dpi,
         colaborador,
         proveniente,
@@ -44,6 +50,8 @@ const actualizarVisita =async (id:any,visita:VisitaInterface) => {
     }
     const respuesta = await Visita.update({
         tipo:tipo,
+        puesto:puesto,
+        nombre:nombre,
         dpi:dpi,
         colaborador:colaborador,
         proveniente:proveniente,
@@ -66,12 +74,20 @@ const obtenerVisita =async (id:string) => {
     return visita;
 }
 
-const obtenerVisitas =async () => {
-    const visita = await Visita.findAll();
-    if(!visita){
+const obtenerVisitas =async (limite:number,desde:number) => {
+    const visitas = await Visita.findAll({
+        order:[
+            ['tipo','DESC']
+        ],
+        offset:desde,
+        limit:limite
+    });
+    if(!visitas){
         return {ok:false,msg:'El registro no existe!'}
     }
-    return visita;
+
+    const total = await Visita.count();
+    return {total,visitas};
 }
 
 const eliminarVisita = async (id:string) => {

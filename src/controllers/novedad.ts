@@ -19,11 +19,13 @@ const getNovedad =async (req:Request, res:Response) => {
 
 const getNovedades =async (req:Request, res:Response) => {
     try {
-        const {limite=10,desde=0}=req.query;
-        const novedad = await mostrarNovedades( Number(limite), Number(desde));
+        const {limite=5,desde=0}=req.query;
+        const {total,novedades} = await mostrarNovedades( Number(limite), Number(desde));
+        
         res.json({
             ok:true,
-            novedad
+            total,
+            novedades
         })
         
     } catch (error) {

@@ -34,9 +34,11 @@ const getVisita =async (req:Request,res:Response) => {
 
 const getVisitas =async (req:Request,res:Response) => {
     try {
-        const visitas = await obtenerVisitas();
+        const {limite=5,desde=0} = req.query;
+        const {total,visitas} = await obtenerVisitas( Number(limite), Number(desde));
         res.json({
             ok:true,
+            total,
             visitas
         })
         

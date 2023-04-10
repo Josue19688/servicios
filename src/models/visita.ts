@@ -11,6 +11,12 @@ const Visita = db.define('T01_visita',{
     tipo:{
         type:DataTypes.STRING
     },
+    puesto:{
+        type:DataTypes.STRING
+    },
+    nombre:{
+        type:DataTypes.STRING
+    },
     dpi:{
         type:DataTypes.STRING
     },

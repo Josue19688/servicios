@@ -69,14 +69,16 @@ const mostrarNovedad =async (id:string) => {
 
 const mostrarNovedades =async (limite:number,desde:number) => {
     
+    
     const novedades =  await Novedad.findAll({
         order:[
-            ['nombre','DESC']
+            ['tipo','DESC']
         ],
         offset:desde,
         limit:limite
     });
 
+    
     const total = await Novedad.count();
     return {total,novedades};
 }

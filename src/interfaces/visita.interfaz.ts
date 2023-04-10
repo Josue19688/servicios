@@ -2,6 +2,8 @@
 
 export interface VisitaInterface{
     tipo:string,
+    puesto:string,
+    nombre:string,
     dpi:string,
     colaborador:string,
     proveniente:string,
