@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 OPR/97.0.0.0-get-/visita
+=======
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36-get-/visita
+>>>>>>> dd1c31f96447bdd212084f795726ff642eee84e0
