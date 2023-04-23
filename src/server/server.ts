@@ -37,9 +37,11 @@ export default class ServerSocket{
 
     async dbConnection(){
         try {
+            await db.authenticate();
             await db.sync();
             console.log('Database online');
         } catch (error:any) {
+            console.log(error);
             throw new Error(error);
         }
     }

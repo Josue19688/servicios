@@ -36,10 +36,12 @@ class ServerSocket {
     dbConnection() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                yield connection_1.default.authenticate();
                 yield connection_1.default.sync();
                 console.log('Database online');
             }
             catch (error) {
+                console.log(error);
                 throw new Error(error);
             }
         });
