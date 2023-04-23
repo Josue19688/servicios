@@ -18,8 +18,8 @@ router.get('/', [
     log_1.logMiddlewares
 ], usuario_1.getUsuarios);
 router.post('/', [
-    validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    // validarToken,
+    // tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     (0, express_validator_1.check)('correo', 'El correo es obligatorio').normalizeEmail().isEmail().not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('correo').custom(db_validators_1.existeEmail),
     (0, express_validator_1.check)('contrasena', 'La contraseña es obligatoria').not().isEmpty().trim().escape(),

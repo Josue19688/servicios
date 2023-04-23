@@ -19,8 +19,8 @@ router.get('/',[
     logMiddlewares
 ],getUsuarios);
 router.post('/',[
-    validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    // validarToken,
+    // tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('correo','El correo es obligatorio').normalizeEmail().isEmail().not().isEmpty().trim().escape(),
     check('correo').custom(existeEmail),
     check('contrasena','La contraseña es obligatoria').not().isEmpty().trim().escape(),
