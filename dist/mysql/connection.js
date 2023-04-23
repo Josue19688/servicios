@@ -4,6 +4,7 @@ const sequelize_1 = require("sequelize");
 const db = new sequelize_1.Sequelize(`${process.env.NAME_DATABASE}`, `${process.env.USER_DATABASE}`, `${process.env.PASS_DATABASE}`, {
     host: process.env.HOST_DATABASE,
     dialect: 'mysql',
+    port: Number(process.env.HOST_DATABASE),
     pool: {
         max: 5,
         min: 0,
