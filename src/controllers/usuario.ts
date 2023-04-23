@@ -20,8 +20,8 @@ const getUsuario=async(req:Request, res:Response)=>{
 const getUsuarios=async(req:Request, res:Response)=>{
     try {
         
-        const {limite=5,desde=0}=req.query;
-        const {total ,usuarios} = await mostrarUsuarios( Number(limite), Number(desde));
+        
+        const {total ,usuarios} = await mostrarUsuarios( );
        
         res.json({
             ok:true,

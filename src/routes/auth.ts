@@ -12,15 +12,15 @@ const router=Router();
 
 
 router.post('/',[
-    logMiddlewares,
     check('correo','El correo es obligatorio').isEmail().not().isEmpty(),
     check('contrasena','La contraseña es obligatoria').not().isEmpty(),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],login);
 
 router.get('/',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    logMiddlewares
 ],renovarToken);
 export {router};

@@ -66,12 +66,19 @@ const obtenerArchivo=async (id:string) => {
 
 
 const obtenerArchivos=async () => {
-    const archivo = await Archivo.findAll();
-    if(!archivo){
+    const archivos = await Archivo.findAll({
+        order:[
+            ['id','asc']
+        ]
+    });
+
+    if(!archivos){
         return {ok:false,msg:'El registro no existe!'}
     }
 
-    return archivo;
+    const total = await Archivo.count();
+
+    return {total,archivos};
 }
 
 const eliminarArchivo = async (id:string) => {
