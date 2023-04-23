@@ -12,13 +12,12 @@ const router=Router();
 
 
 router.get('/',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
-    validarCampos
+    validarCampos,
+    logMiddlewares,
 ],getVisitas);
 router.post('/',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('tipo','El tipo es obligatorio').not().isEmpty().trim().escape(),
@@ -26,18 +25,17 @@ router.post('/',[
     check('colaborador','El colaborador es obligatorio').not().isEmpty().trim().escape(),
     check('proveniente','El proveniente es obligatorio').not().isEmpty().trim().escape(),
     check('ingreso','La hora de ingreso es obligatoria').not().isEmpty().trim().escape(),
-    check('salida','La hora de salida es obligatoria').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares,
 ],postVisita);
 router.get('/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('id','El id es obligatorio').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],getVisita);
 router.put('/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('id','El id es obligatorio').not().isEmpty().trim().escape(),
@@ -47,15 +45,16 @@ router.put('/:id',[
     check('proveniente','El proveniente es obligatorio').not().isEmpty().trim().escape(),
     check('ingreso','La hora de ingreso es obligatoria').not().isEmpty().trim().escape(),
     check('salida','La hora de salida es obligatoria').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],putVisita);
 router.delete('/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     esAdminRol,
     check('id','El id es obligatorio').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],deleteVisita);
 
 export {router};

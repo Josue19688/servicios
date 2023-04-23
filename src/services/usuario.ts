@@ -81,13 +81,12 @@ const mostrarUsuario = async(id:string)=>{
     return usuario;
 }
 
-const mostrarUsuarios =  async(limite:number,desde:number)=>{
+const mostrarUsuarios =  async()=>{
     const usuarios  = await Usuario.scope('withoutPassword').findAll({
         order:[
-            ['nombre','DESC']
+            ['id','DESC']
         ],
-        offset:desde,
-        limit:limite
+        
     });
     const total = await Usuario.count();
     return {total, usuarios};

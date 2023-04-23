@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import { subirArchivo } from "../utils/subir-archivo";
 import Usuario from "../models/usuario";
+import Visita from "../models/visita";
 
 
 
@@ -53,6 +54,15 @@ const actualizarImagen=async(req:Request, res:Response)=>{
             }
             
             break;
+        case 'visita':
+            modelo=await Visita.findByPk(id);
+            if(!modelo){
+                return res.status(400).json({
+                    msg:`No existe el registro con el id :  ${id}`
+                })
+            }
+            
+            break;
         default:
             return res.status(500).json({
                 msg:`Se me olvido olvidar esto`
@@ -86,6 +96,17 @@ const actualizarImagen=async(req:Request, res:Response)=>{
                     }
                 })
                 
+                break;
+            case 'visita':
+                user = await Visita.update({
+                    imagen:nombre
+                },
+                {
+                    where:{
+                        id:id
+                    }
+                })
+                    
                 break;
             default:
                 return res.status(500).json({
@@ -125,7 +146,15 @@ const mostrarImagen=async(req:Request, res:Response)=>{
             }
             
             break;
-        
+        case 'visita':
+            modelo=await Visita.findByPk(id);
+            if(!modelo){
+                return res.status(400).json({
+                    msg:`No existe el registro con el id :  ${id}`
+                })
+            }
+                
+            break;
         default:
             return res.status(500).json({
                 msg:`Se me olvido olvidar esto`
@@ -177,7 +206,15 @@ const mostrarImagenDos=async(req:Request, res:Response)=>{
             }
             
             break;
-        
+        case 'visita':
+            modelo=await Visita.findByPk(id);
+            if(!modelo){
+                return res.status(400).json({
+                    msg:`No existe el registro con el id :  ${id}`
+                })
+            }
+                    
+            break;
         default:
             return res.status(500).json({
                 msg:`Se me olvido olvidar esto`

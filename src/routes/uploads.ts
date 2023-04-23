@@ -18,23 +18,23 @@ const router=Router();
 
 
 router.put('/:coleccion/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     validarArchivo,
     check('coleccion').custom(c=>coleccionesPermitidas(c,['usuario','novedad','visita','archivo'])),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],actualizarImagen);
 
 router.get('/:coleccion/:id',[
-    logMiddlewares,
     check('coleccion').custom(c=>coleccionesPermitidas(c,['usuario','novedad','visita','archivo'])),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],mostrarImagen);
 router.get('/archivo/:coleccion/:id/:archivo',[
-    logMiddlewares,
     check('coleccion').custom(c=>coleccionesPermitidas(c,['usuario','novedad','visita','archivo'])),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],mostrarImagenDos);
 
 

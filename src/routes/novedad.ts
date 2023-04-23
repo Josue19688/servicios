@@ -14,12 +14,11 @@ const router=Router();
 
 
 router.get('/',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    logMiddlewares
 ],getNovedades);
 router.post('/',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('tipo','El tipo es obligatorio').not().isEmpty().trim().escape(),
@@ -27,17 +26,17 @@ router.post('/',[
     check('fecha','La fecha es obligatoria').not().isEmpty().trim().escape(),
     check('puesto','El puesto es obligatorio').not().isEmpty().trim().escape(),
     check('preliminar','La preliminar es obligatoria').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],postNovedad);
 router.get('/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('id','La id es obligatorio').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],getNovedad);
 router.put('/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('id','La id es obligatorio').not().isEmpty().trim().escape(),
@@ -46,15 +45,16 @@ router.put('/:id',[
     check('fecha','La fecha es obligatoria').not().isEmpty().trim().escape(),
     check('puesto','El puesto es obligatorio').not().isEmpty().trim().escape(),
     check('preliminar','La preliminar es obligatoria').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],updateNovedad);
 router.delete('/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     esAdminRol,
     check('id','La id es obligatorio').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares,
 ],deleteNovedad);
 
 export {router};

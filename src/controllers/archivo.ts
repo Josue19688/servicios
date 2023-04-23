@@ -51,10 +51,12 @@ const getArchivo =async (req:Request,res:Response) => {
 
 const getArchivos =async (req:Request,res:Response) => {
     try {
-        const archivo = await obtenerArchivos();
+       
+        const {total, archivos} = await obtenerArchivos();
         res.json({
             ok:true,
-            archivo
+            total,
+            archivos
         })
         
     } catch (error) {

@@ -13,13 +13,12 @@ const router=Router();
 
 
 router.get('/',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],getUsuarios);
 router.post('/',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('correo','El correo es obligatorio').normalizeEmail().isEmail().not().isEmpty().trim().escape(),
@@ -27,18 +26,18 @@ router.post('/',[
     check('contrasena','La contraseña es obligatoria').not().isEmpty().trim().escape(),
     check('nombre','La nombre es obligatoria').not().isEmpty().trim().escape(),
     check('unidad','La unidad es obligatoria').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],postUsuario);
 router.get('/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('id').custom(existeUserId),
     check('id','El id no es correcto').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],getUsuario);
 router.put('/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('id').custom(existeUserId),
@@ -48,16 +47,17 @@ router.put('/:id',[
     check('unidad','La unidad es obligatoria').not().isEmpty().trim().escape(),
     check('rol','La rol es obligatoria').not().isEmpty().trim().escape(),
     check('rol').custom(esRoleValido),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],updateUsuario);
 router.delete('/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     esAdminRol,
     check('id').custom(existeUserId),
     check('id','El id no es correcto').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],deleteUsuario);
 
 export {router};

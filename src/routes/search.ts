@@ -15,17 +15,17 @@ const router=Router();
 
 
 router.get('/:busqueda',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
-    validarCampos
+    validarCampos,
+    logMiddlewares,
 ],searchModel);
 
 router.get('/:modelo/:busqueda',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
-    validarCampos
+    validarCampos,
+    logMiddlewares,
 ],searchModelo);
 
 export {router};
