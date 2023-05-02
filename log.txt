@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 OPR/97.0.0.0-post-/ingreso
+=======
+PostmanRuntime/7.31.3-post-/usuario
+>>>>>>> c32e61975c37df4fb435220fba5d0b3e8b69109c
