@@ -12,12 +12,12 @@ const router=Router();
 
 
 router.get('/',[
-    logMiddlewares,
+    validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],getArchivos);
 router.post('/',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('tipo','El tipo es obligatorio').not().isEmpty().trim().escape(),
@@ -26,17 +26,17 @@ router.post('/',[
     check('origen','El origen es obligatorio').not().isEmpty().trim().escape(),
     check('unidad','La  unidad es obligatoria').not().isEmpty().trim().escape(),
     check('descripcion','La  descripcion es obligatoria').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares
 ],postArchivo);
 router.get('/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('id','El id es obligatorio').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares,
 ],getArchivo);
 router.put('/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('id','El id es obligatorio').not().isEmpty().trim().escape(),
@@ -46,15 +46,16 @@ router.put('/:id',[
     check('origen','El origen es obligatorio').not().isEmpty().trim().escape(),
     check('unidad','La  unidad es obligatoria').not().isEmpty().trim().escape(),
     check('descripcion','La  descripcion es obligatoria').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares,
 ],putArchivo);
 router.delete('/:id',[
-    logMiddlewares,
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     esAdminRol,
     check('id','El id es obligatorio').not().isEmpty().trim().escape(),
-    validarCampos
+    validarCampos,
+    logMiddlewares,
 ],deleteArchivo);
 
 export {router};

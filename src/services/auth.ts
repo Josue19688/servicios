@@ -2,11 +2,13 @@ import { AuthInterface } from "../interfaces/auth";
 import Usuario from "../models/usuario";
 import bcryptjs from 'bcryptjs';
 import generarToken from "../utils/generarJWT";
+import { enviarMail } from "./enviarMail";
 
 
 const loginUsuario =async (userLogin:AuthInterface) => {
     
     const {correo, contrasena} =  userLogin;
+
 
     const user = await Usuario.findOne({
         where:{

@@ -77,7 +77,7 @@ const obtenerVisita =async (id:string) => {
 const obtenerVisitas =async (limite:number,desde:number) => {
     const visitas = await Visita.findAll({
         order:[
-            ['tipo','DESC']
+            ['id','DESC']
         ],
         offset:desde,
         limit:limite

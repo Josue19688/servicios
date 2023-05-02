@@ -67,15 +67,13 @@ const mostrarNovedad =async (id:string) => {
     return novedad;
 }
 
-const mostrarNovedades =async (limite:number,desde:number) => {
+const mostrarNovedades =async () => {
     
     
     const novedades =  await Novedad.findAll({
         order:[
-            ['tipo','DESC']
+            ['id','DESC']
         ],
-        offset:desde,
-        limit:limite
     });
 
     
