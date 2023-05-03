@@ -4,6 +4,7 @@ import Archivo from "./archivo";
 import Novedad from "./novedad";
 import Visita from "./visita";
 import Ingreso from "./ingresos";
+import Vehiculo from "./vehiculo";
 
 
 const Usuario = db.define('T01_usuarios',{
@@ -61,4 +62,5 @@ Usuario.hasMany(Novedad);
 Usuario.hasMany(Visita);
 Usuario.hasMany(Archivo);
 Usuario.hasMany(Ingreso);
+Usuario.hasMany(Vehiculo);
 export default Usuario;
