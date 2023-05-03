@@ -4,11 +4,7 @@ import fs from "fs";
 import { subirArchivo } from "../utils/subir-archivo";
 import Usuario from "../models/usuario";
 import Visita from "../models/visita";
-<<<<<<< HEAD
 import Novedad from "../models/novedad";
-=======
->>>>>>> c32e61975c37df4fb435220fba5d0b3e8b69109c
-
 
 
 
@@ -121,7 +117,6 @@ const actualizarImagen=async(req:Request, res:Response)=>{
                 })
                     
                 break;
-<<<<<<< HEAD
             case 'novedad':
                 user = await Novedad.update({
                     imagen:nombre
@@ -133,8 +128,6 @@ const actualizarImagen=async(req:Request, res:Response)=>{
                 })
                         
                 break;
-=======
->>>>>>> c32e61975c37df4fb435220fba5d0b3e8b69109c
             default:
                 return res.status(500).json({
                     msg:`Se me olvido olvidar esto`
@@ -182,7 +175,7 @@ const mostrarImagen=async(req:Request, res:Response)=>{
             }
                 
             break;
-<<<<<<< HEAD
+
         case 'novedad':
             modelo=await Novedad.findByPk(id);
             if(!modelo){
@@ -192,8 +185,7 @@ const mostrarImagen=async(req:Request, res:Response)=>{
             }
                     
             break;
-=======
->>>>>>> c32e61975c37df4fb435220fba5d0b3e8b69109c
+
         default:
             return res.status(500).json({
                 msg:`Se me olvido olvidar esto`
@@ -254,7 +246,7 @@ const mostrarImagenDos=async(req:Request, res:Response)=>{
             }
                     
             break;
-<<<<<<< HEAD
+
         case 'novedad':
             modelo=await Novedad.findByPk(id);
             if(!modelo){
@@ -264,8 +256,7 @@ const mostrarImagenDos=async(req:Request, res:Response)=>{
             }
                         
             break;
-=======
->>>>>>> c32e61975c37df4fb435220fba5d0b3e8b69109c
+
         default:
             return res.status(500).json({
                 msg:`Se me olvido olvidar esto`
