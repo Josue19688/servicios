@@ -7,10 +7,10 @@ const crear =async (req:Request, res:Response) => {
     try {
         const body =  req.body;
         const {id}=res.locals.usuario;
-        const {ok,msg}= await insertar(body,id);
+        const {ok,vehiculo}= await insertar(body,id);
         res.json({
             ok,
-            msg,
+            vehiculo,
         })
         
     } catch (error) {
@@ -34,11 +34,11 @@ const update = async (req:Request, res:Response) => {
 
 const obtenerRegistro= async (req:Request, res:Response) => {
     try {
-        const {total,registros} = await obtenerRegistros();
+        const {total,vehiculos} = await obtenerRegistros();
         res.json({
             ok:true,
             total,
-            registros
+            vehiculos
         })
     } catch (error) {
         handleHttp(res,'ERROR_GET_MOVIMIENTO_VEHICULO');

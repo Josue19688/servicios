@@ -1,6 +1,7 @@
 import sequelize from "sequelize";
 import { VehiculoInterface } from "../interfaces/vehiculo.interface";
 import Vehiculo from "../models/vehiculo";
+import Usuario from "../models/usuario";
 
 const insertar =async (data:VehiculoInterface,userId:Number) => {
     
@@ -15,6 +16,7 @@ const insertar =async (data:VehiculoInterface,userId:Number) => {
 
     /**
      * Verificar el maximo registro con el vehiculo 
+     * si existe un registro pendiente y esta en verdadero no dejar realizar el siguiente registro pendiente
      */
 
     const registro = await Vehiculo.findAll({
@@ -30,7 +32,7 @@ const insertar =async (data:VehiculoInterface,userId:Number) => {
     let maximo =resultado.max;
 
     if(maximo>0 || maximo!==null){
-        return {ok:false,msg:`El vehiculo ${vehiculo} tiene pendiente un registro`}
+        return {ok:false,vehiculo:`El vehiculo ${vehiculo} tiene pendiente un registro`}
     }
 
     const respuesta = await Vehiculo.create({
@@ -43,7 +45,7 @@ const insertar =async (data:VehiculoInterface,userId:Number) => {
         T01UsuarioId:userId
     });
 
-    return {ok:true,msg:respuesta};
+    return {ok:true,vehiculo:respuesta};
 
 }
 
@@ -80,7 +82,7 @@ const eliminar =async (id:string) => {
         return {ok:false,msg:'El registro no existe.'};
     }
 
-    const respuesta = await Vehiculo.destroy({
+    await Vehiculo.destroy({
         where:{
             id:id
         }
@@ -92,7 +94,7 @@ const eliminar =async (id:string) => {
 const obtenerRegistros =async () => {
     const status =true;
 
-    const [total, registros] =  await Promise.all([
+    const [total,vehiculos] =  await Promise.all([
         Vehiculo.count(
             {
                 where:{
@@ -107,7 +109,9 @@ const obtenerRegistros =async () => {
         })
     ]);
 
-    return {total, registros};
+    
+
+    return {total, vehiculos};
 }
 
 
