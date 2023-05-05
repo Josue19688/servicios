@@ -1,7 +1,7 @@
 import sequelize from "sequelize";
 import { VehiculoInterface } from "../interfaces/vehiculo.interface";
 import Vehiculo from "../models/vehiculo";
-import Usuario from "../models/usuario";
+
 
 const insertar =async (data:VehiculoInterface,userId:Number) => {
     
@@ -62,7 +62,7 @@ const actualizar =async (id:string,data:VehiculoInterface) => {
         sede
     } = data;
 
-    const respuesta = await Vehiculo.update({
+    await Vehiculo.update({
         kmingreso:kmingreso,
         status:false,
         cingreso:cingreso,
@@ -73,7 +73,7 @@ const actualizar =async (id:string,data:VehiculoInterface) => {
         }
     });
 
-    return {ok:true,msg:respuesta};
+    return {ok:true,msg:registro};
 }
 
 const eliminar =async (id:string) => {
