@@ -9,6 +9,8 @@ const archivo_1 = __importDefault(require("./archivo"));
 const novedad_1 = __importDefault(require("./novedad"));
 const visita_1 = __importDefault(require("./visita"));
 const ingresos_1 = __importDefault(require("./ingresos"));
+const vehiculo_1 = __importDefault(require("./vehiculo"));
+const agente_1 = __importDefault(require("./agente"));
 const Usuario = connection_1.default.define('T01_usuarios', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,
@@ -63,4 +65,6 @@ Usuario.hasMany(novedad_1.default);
 Usuario.hasMany(visita_1.default);
 Usuario.hasMany(archivo_1.default);
 Usuario.hasMany(ingresos_1.default);
+Usuario.hasMany(vehiculo_1.default);
+Usuario.hasMany(agente_1.default);
 exports.default = Usuario;
