@@ -7,16 +7,24 @@ const insertarNovedad =async (novedad:NovedadInterface,userId:Number) => {
 
     const {
         tipo,
+        nombres,
+        placa,
+        vehiculo,
         hora,
         fecha,
         puesto,
         preliminar,
         descripcion,
     } = novedad;
+
+    console.log(novedad)
     
 
     const respuesta =  await Novedad.create({
         tipo:tipo,
+        nombres:nombres,
+        placa:placa,
+        vehiculo:vehiculo,
         hora:hora,
         fecha:fecha,
         puesto:puesto,
@@ -30,6 +38,9 @@ const insertarNovedad =async (novedad:NovedadInterface,userId:Number) => {
 const actualizarNovedad =async (id:any,novedad:NovedadInterface) => {
     const {
         tipo,
+        nombres,
+        placa,
+        vehiculo,
         hora,
         fecha,
         puesto,
@@ -44,6 +55,9 @@ const actualizarNovedad =async (id:any,novedad:NovedadInterface) => {
 
     const respuesta = await Novedad.update({
         tipo:tipo,
+        nombres:nombres,
+        placa:placa,
+        vehiculo:vehiculo,
         hora:hora,
         fecha:fecha,
         puesto:puesto,

@@ -11,6 +11,15 @@ const Novedad = db.define('T01_novedades',{
     tipo:{
         type:DataTypes.STRING
     },
+    nombres:{
+        type:DataTypes.STRING
+    },
+    placa:{
+        type:DataTypes.STRING
+    },
+    vehiculo:{
+        type:DataTypes.STRING
+    },
     hora:{
         type:DataTypes.TIME
     },

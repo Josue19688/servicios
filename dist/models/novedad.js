@@ -14,6 +14,15 @@ const Novedad = connection_1.default.define('T01_novedades', {
     tipo: {
         type: sequelize_1.DataTypes.STRING
     },
+    nombres: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    placa: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    vehiculo: {
+        type: sequelize_1.DataTypes.STRING
+    },
     hora: {
         type: sequelize_1.DataTypes.TIME
     },
