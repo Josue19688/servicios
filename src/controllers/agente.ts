@@ -37,6 +37,8 @@ const obtenerAgente =async (req:Request,res:Response) => {
             activos,
             totalSupendidos,
             suspendidos,
+            totalVacaciones,
+            vacaciones,
             totalBaja,
             baja} = await getAgentes();
 
@@ -46,6 +48,8 @@ const obtenerAgente =async (req:Request,res:Response) => {
             activos,
             totalSupendidos,
             suspendidos,
+            totalVacaciones,
+            vacaciones,
             totalBaja,
             baja
         })

@@ -13,14 +13,15 @@ const getNovedad =async (req:Request, res:Response) => {
         })
         
     } catch (error) {
+        console.log(error)
         handleHttp(res,'ERROR_GET_NOVEDAD');
     }
 }
 
 const getNovedades =async (req:Request, res:Response) => {
     try {
-      
-        const {total,novedades} = await mostrarNovedades( );
+        
+        const {total,novedades} = await mostrarNovedades();
         
         res.json({
             ok:true,

@@ -112,6 +112,8 @@ const getAgentes =async () => {
         activos,
         totalSupendidos,
         suspendidos,
+        totalVacaciones,
+        vacaciones,
         totalBaja,
         baja
     ] = await Promise.all([
@@ -137,6 +139,16 @@ const getAgentes =async () => {
         }),
         Agente.count({
             where:{
+                status:3
+            }
+        }),
+        Agente.findAll({
+            where:{
+                status:3
+            }
+        }),
+        Agente.count({
+            where:{
                 status:0
             }
         }),
@@ -153,6 +165,8 @@ const getAgentes =async () => {
         activos,
         totalSupendidos,
         suspendidos,
+        totalVacaciones,
+        vacaciones,
         totalBaja,
         baja
     };

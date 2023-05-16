@@ -90,7 +90,7 @@ const mostrarNovedades =async () => {
         ],
     });
 
-    
+   
     const total = await Novedad.count();
     return {total,novedades};
 }

@@ -4,7 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 
 
 
-const subirArchivo=(files:any, extencionesValidas=['png','jpg','jpeg','gif'],carpeta='')=>{
+const subirArchivo=(files:any, extencionesValidas=['png','jpg','jpeg','gif','pdf'],carpeta='')=>{
 
 
     return new Promise((resolve, reject)=>{
