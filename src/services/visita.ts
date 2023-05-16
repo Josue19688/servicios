@@ -1,4 +1,5 @@
 import { VisitaInterface } from "../interfaces/visita.interfaz";
+import Usuario from "../models/usuario";
 import Visita from "../models/visita";
 
 const insertarVisita =async (visita:VisitaInterface,userId:Number) => {
@@ -66,12 +67,24 @@ const actualizarVisita =async (id:any,visita:VisitaInterface) => {
     return respuesta;
 }
 
-const obtenerVisita =async (id:string) => {
-    const visita = await Visita.findByPk(id);
-    if(!visita){
-        return {ok:false,msg:'El registro no existe!'}
-    }
-    return visita;
+
+//TODO: OBTENET VISITAS POR ID DEL USUARIO
+
+const visitaUser = async (id:string) => {
+    const visitas  =  await Visita.findAll({
+        where:{
+            T01UsuarioId:id
+        }
+         
+    })
+
+    const total = await Visita.count({
+        where:{
+            T01UsuarioId:id
+        }
+    });
+    return {total,visitas};
+
 }
 
 const obtenerVisitas =async (limite:number,desde:number) => {
@@ -106,4 +119,4 @@ const eliminarVisita = async (id:string) => {
 }
 
 
-export {insertarVisita,actualizarVisita,obtenerVisita,obtenerVisitas,eliminarVisita};
+export {insertarVisita,actualizarVisita,obtenerVisitas,eliminarVisita,visitaUser};

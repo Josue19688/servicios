@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-PostmanRuntime/7.32.2-post-/auth
-=======
-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36-get-/uploads
->>>>>>> 3ee68b8f877285ef6bfcb8884b3ff27a9590f368
+PostmanRuntime/7.32.2-get-/visita

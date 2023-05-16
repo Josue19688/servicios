@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { check } from "express-validator";
-import { deleteVisita, getVisita, getVisitas, postVisita, putVisita } from "../controllers/visita";
+import { deleteVisita,  getVisitas, postVisita, putVisita, visitasUsuarios } from "../controllers/visita";
 import { logMiddlewares } from "../middlewares/log";
 import { esAdminRol, tieneRol } from "../middlewares/validar-roles";
 import { validarCampos } from "../utils/validar-campos";
@@ -31,10 +31,9 @@ router.post('/',[
 router.get('/:id',[
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
-    check('id','El id es obligatorio').not().isEmpty().trim().escape(),
-    validarCampos,
     logMiddlewares
-],getVisita);
+],visitasUsuarios);
+
 router.put('/:id',[
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),

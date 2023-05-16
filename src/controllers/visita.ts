@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { actualizarVisita, eliminarVisita, insertarVisita, obtenerVisita, obtenerVisitas } from "../services/visita";
+import { actualizarVisita, eliminarVisita, insertarVisita,  obtenerVisitas, visitaUser } from "../services/visita";
 import { handleHttp } from "../utils/error.handler";
 
 
@@ -19,18 +19,7 @@ const postVisita =async (req:Request,res:Response) => {
         handleHttp(res,'ERROR_POST_VISITA');
     }
 }
-const getVisita =async (req:Request,res:Response) => {
-    try {
-        const {id} =  req.params;
-        const visita =  await obtenerVisita(id);
-        res.json({
-            ok:true,
-            visita
-        })
-    } catch (error) {
-        handleHttp(res,'ERROR_GET_VISITA');
-    }
-}
+
 
 const getVisitas =async (req:Request,res:Response) => {
     try {
@@ -44,6 +33,20 @@ const getVisitas =async (req:Request,res:Response) => {
         
     } catch (error) {
         handleHttp(res,'ERROR_GET_VISITAs');
+    }
+}
+
+const visitasUsuarios = async (req:Request,res:Response) => {
+    try {
+        const {id} = req.params;
+        const {total, visitas} = await visitaUser(id);
+        res.json({
+            ok:true,
+            total,
+            visitas
+        })
+    } catch (error) {
+        handleHttp(res,'ERROR_GET_VISITAS_USER')
     }
 }
 
@@ -77,4 +80,4 @@ const deleteVisita =async (req:Request,res:Response) => {
 }
 
 
-export {postVisita,getVisita,getVisitas,putVisita,deleteVisita};
+export {postVisita,getVisitas,putVisita,deleteVisita,visitasUsuarios};
