@@ -5,45 +5,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../mysql/connection"));
-const Novedad = connection_1.default.define('T01_novedades', {
+const Vehiculo = connection_1.default.define('T10_movimientovehiculos', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    tipo: {
-        type: sequelize_1.DataTypes.STRING
-    },
-    nombres: {
-        type: sequelize_1.DataTypes.STRING
-    },
-    placa: {
+    piloto: {
         type: sequelize_1.DataTypes.STRING
     },
     vehiculo: {
         type: sequelize_1.DataTypes.STRING
     },
-    hora: {
-        type: sequelize_1.DataTypes.TIME
-    },
-    fecha: {
-        type: sequelize_1.DataTypes.DATE,
-    },
-    puesto: {
+    kmsalida: {
         type: sequelize_1.DataTypes.STRING
     },
-    preliminar: {
+    kmingreso: {
         type: sequelize_1.DataTypes.STRING
     },
-    descripcion: {
+    status: {
+        type: sequelize_1.DataTypes.BOOLEAN
+    },
+    csalida: {
         type: sequelize_1.DataTypes.STRING
     },
-    imagen: {
+    cingreso: {
         type: sequelize_1.DataTypes.STRING
     },
+    sede: {
+        type: sequelize_1.DataTypes.STRING
+    }
 }, {
     timestamps: true,
 });
-//para registrar las novedades que ingresa el usuario
-//Usuario.hasMany(Novedad);
-exports.default = Novedad;
+exports.default = Vehiculo;

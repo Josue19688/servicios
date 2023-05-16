@@ -18,6 +18,7 @@ const fs_1 = __importDefault(require("fs"));
 const subir_archivo_1 = require("../utils/subir-archivo");
 const usuario_1 = __importDefault(require("../models/usuario"));
 const visita_1 = __importDefault(require("../models/visita"));
+const novedad_1 = __importDefault(require("../models/novedad"));
 // const cargarArchivo=async(req:Request, res:Response)=>{
 //     try {
 //         const pathCompleto = await subirArchivo(req.files,[],'usuario');
@@ -59,6 +60,14 @@ const actualizarImagen = (req, res) => __awaiter(void 0, void 0, void 0, functio
                 });
             }
             break;
+        case 'novedad':
+            modelo = yield novedad_1.default.findByPk(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg: `No existe el registro con el id :  ${id}`
+                });
+            }
+            break;
         default:
             return res.status(500).json({
                 msg: `Se me olvido olvidar esto`
@@ -87,6 +96,15 @@ const actualizarImagen = (req, res) => __awaiter(void 0, void 0, void 0, functio
                 break;
             case 'visita':
                 user = yield visita_1.default.update({
+                    imagen: nombre
+                }, {
+                    where: {
+                        id: id
+                    }
+                });
+                break;
+            case 'novedad':
+                user = yield novedad_1.default.update({
                     imagen: nombre
                 }, {
                     where: {
@@ -132,6 +150,14 @@ const mostrarImagen = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 });
             }
             break;
+        case 'novedad':
+            modelo = yield novedad_1.default.findByPk(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg: `No existe el registro con el id :  ${id}`
+                });
+            }
+            break;
         default:
             return res.status(500).json({
                 msg: `Se me olvido olvidar esto`
@@ -169,6 +195,14 @@ const mostrarImagenDos = (req, res) => __awaiter(void 0, void 0, void 0, functio
             break;
         case 'visita':
             modelo = yield visita_1.default.findByPk(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg: `No existe el registro con el id :  ${id}`
+                });
+            }
+            break;
+        case 'novedad':
+            modelo = yield novedad_1.default.findByPk(id);
             if (!modelo) {
                 return res.status(400).json({
                     msg: `No existe el registro con el id :  ${id}`

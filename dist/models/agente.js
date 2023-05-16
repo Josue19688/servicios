@@ -5,45 +5,64 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../mysql/connection"));
-const Novedad = connection_1.default.define('T01_novedades', {
+const Agente = connection_1.default.define('T10_Agente', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    tipo: {
+    nombre: {
         type: sequelize_1.DataTypes.STRING
     },
-    nombres: {
+    dpi: {
         type: sequelize_1.DataTypes.STRING
     },
-    placa: {
+    telefono: {
         type: sequelize_1.DataTypes.STRING
     },
-    vehiculo: {
+    correo: {
         type: sequelize_1.DataTypes.STRING
     },
-    hora: {
-        type: sequelize_1.DataTypes.TIME
+    nacimiento: {
+        type: sequelize_1.DataTypes.STRING
     },
-    fecha: {
-        type: sequelize_1.DataTypes.DATE,
+    direccion: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    igss: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    nit: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    sangre: {
+        type: sequelize_1.DataTypes.STRING
     },
     puesto: {
         type: sequelize_1.DataTypes.STRING
     },
-    preliminar: {
+    grupo: {
         type: sequelize_1.DataTypes.STRING
     },
-    descripcion: {
+    status: {
         type: sequelize_1.DataTypes.STRING
     },
     imagen: {
         type: sequelize_1.DataTypes.STRING
     },
+    licenciaarma: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    licenciavehiculo: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    cv: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    ficha: {
+        type: sequelize_1.DataTypes.STRING
+    }
 }, {
     timestamps: true,
 });
-//para registrar las novedades que ingresa el usuario
-//Usuario.hasMany(Novedad);
-exports.default = Novedad;
+exports.default = Agente;
