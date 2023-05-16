@@ -1,4 +1,4 @@
-import { update } from "../controllers/vehiculo";
+
 import { AgenteInterface } from "../interfaces/agente.interface";
 import Agente from "../models/agente";
 
@@ -145,7 +145,6 @@ const getAgentes =async () => {
                 status:0
             }
         })
-
     ])
 
     return {
