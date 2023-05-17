@@ -3,6 +3,8 @@ import Usuario from "../models/usuario";
 import Novedad from "../models/novedad";
 import Visita from "../models/visita";
 import Archivo from "../models/archivo";
+import Ingreso from "../models/ingresos";
+import Vehiculo from "../models/vehiculo";
 
 
 
@@ -83,6 +85,26 @@ const searchColleccion = async (colleccion:string,search:string) => {
                     tipo:{
                         [Op.like]: `%${search}%`
                     }
+                },
+            })
+            break;
+        case 'ingreso':
+            data=await Ingreso.findAll({
+                where:{
+                    codigo:{
+                        [Op.like]: `%${search}%`
+                    },
+                    status:true
+                },
+            })
+            break;
+        case 'vehiculo':
+            data=await Vehiculo.findAll({
+                where:{
+                    vehiculo:{
+                        [Op.like]: `%${search}%`
+                    },
+                    status:true
                 },
             })
             break;
