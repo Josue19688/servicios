@@ -18,6 +18,8 @@ const usuario_1 = __importDefault(require("../models/usuario"));
 const novedad_1 = __importDefault(require("../models/novedad"));
 const visita_1 = __importDefault(require("../models/visita"));
 const archivo_1 = __importDefault(require("../models/archivo"));
+const ingresos_1 = __importDefault(require("../models/ingresos"));
+const vehiculo_1 = __importDefault(require("../models/vehiculo"));
 const buscarTodo = (palabra) => __awaiter(void 0, void 0, void 0, function* () {
     const [usuario, novedad, visita, archivo] = yield Promise.all([
         usuario_1.default.scope('withoutPassword').findAll({
@@ -88,6 +90,26 @@ const searchColleccion = (colleccion, search) => __awaiter(void 0, void 0, void 
                     tipo: {
                         [sequelize_1.Op.like]: `%${search}%`
                     }
+                },
+            });
+            break;
+        case 'ingreso':
+            data = yield ingresos_1.default.findAll({
+                where: {
+                    codigo: {
+                        [sequelize_1.Op.like]: `%${search}%`
+                    },
+                    status: true
+                },
+            });
+            break;
+        case 'vehiculo':
+            data = yield vehiculo_1.default.findAll({
+                where: {
+                    vehiculo: {
+                        [sequelize_1.Op.like]: `%${search}%`
+                    },
+                    status: true
                 },
             });
             break;

@@ -22,6 +22,7 @@ const getNovedad = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
     catch (error) {
+        console.log(error);
         (0, error_handler_1.handleHttp)(res, 'ERROR_GET_NOVEDAD');
     }
 });

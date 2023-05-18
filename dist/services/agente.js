@@ -76,7 +76,7 @@ const actualizar = (id, agente) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.actualizar = actualizar;
 const getAgentes = () => __awaiter(void 0, void 0, void 0, function* () {
-    const [totalActivos, activos, totalSupendidos, suspendidos, totalBaja, baja] = yield Promise.all([
+    const [totalActivos, activos, totalSupendidos, suspendidos, totalVacaciones, vacaciones, totalBaja, baja] = yield Promise.all([
         agente_1.default.count({
             where: {
                 status: 1
@@ -95,6 +95,16 @@ const getAgentes = () => __awaiter(void 0, void 0, void 0, function* () {
         agente_1.default.findAll({
             where: {
                 status: 2
+            }
+        }),
+        agente_1.default.count({
+            where: {
+                status: 3
+            }
+        }),
+        agente_1.default.findAll({
+            where: {
+                status: 3
             }
         }),
         agente_1.default.count({
@@ -114,6 +124,8 @@ const getAgentes = () => __awaiter(void 0, void 0, void 0, function* () {
         activos,
         totalSupendidos,
         suspendidos,
+        totalVacaciones,
+        vacaciones,
         totalBaja,
         baja
     };

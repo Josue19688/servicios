@@ -30,10 +30,8 @@ router.post('/', [
 router.get('/:id', [
     validarJWT_1.validarToken,
     (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
-    (0, express_validator_1.check)('id', 'El id es obligatorio').not().isEmpty().trim().escape(),
-    validar_campos_1.validarCampos,
     log_1.logMiddlewares
-], visita_1.getVisita);
+], visita_1.visitasUsuarios);
 router.put('/:id', [
     validarJWT_1.validarToken,
     (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
