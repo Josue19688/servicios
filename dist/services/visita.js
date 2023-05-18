@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eliminarVisita = exports.obtenerVisitas = exports.obtenerVisita = exports.actualizarVisita = exports.insertarVisita = void 0;
+exports.visitaUser = exports.eliminarVisita = exports.obtenerVisitas = exports.actualizarVisita = exports.insertarVisita = void 0;
 const visita_1 = __importDefault(require("../models/visita"));
 const insertarVisita = (visita, userId) => __awaiter(void 0, void 0, void 0, function* () {
     const { tipo, puesto, nombre, dpi, colaborador, proveniente, ingreso, salida, placa, vehiculo } = visita;
@@ -56,14 +56,21 @@ const actualizarVisita = (id, visita) => __awaiter(void 0, void 0, void 0, funct
     return respuesta;
 });
 exports.actualizarVisita = actualizarVisita;
-const obtenerVisita = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const visita = yield visita_1.default.findByPk(id);
-    if (!visita) {
-        return { ok: false, msg: 'El registro no existe!' };
-    }
-    return visita;
+//TODO: OBTENET VISITAS POR ID DEL USUARIO
+const visitaUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const visitas = yield visita_1.default.findAll({
+        where: {
+            T01UsuarioId: id
+        }
+    });
+    const total = yield visita_1.default.count({
+        where: {
+            T01UsuarioId: id
+        }
+    });
+    return { total, visitas };
 });
-exports.obtenerVisita = obtenerVisita;
+exports.visitaUser = visitaUser;
 const obtenerVisitas = (limite, desde) => __awaiter(void 0, void 0, void 0, function* () {
     const visitas = yield visita_1.default.findAll({
         order: [

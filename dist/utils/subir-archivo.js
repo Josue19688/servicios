@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.subirArchivo = void 0;
 const path_1 = __importDefault(require("path"));
 const uuid_1 = require("uuid");
-const subirArchivo = (files, extencionesValidas = ['png', 'jpg', 'jpeg', 'gif'], carpeta = '') => {
+const subirArchivo = (files, extencionesValidas = ['png', 'jpg', 'jpeg', 'gif', 'pdf'], carpeta = '') => {
     return new Promise((resolve, reject) => {
         const { archivo } = files;
         const nombreCortado = archivo.name.split('.');

@@ -45,13 +45,15 @@ const updateAgente = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.updateAgente = updateAgente;
 const obtenerAgente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { ok, totalActivos, activos, totalSupendidos, suspendidos, totalBaja, baja } = yield (0, agente_1.getAgentes)();
+        const { ok, totalActivos, activos, totalSupendidos, suspendidos, totalVacaciones, vacaciones, totalBaja, baja } = yield (0, agente_1.getAgentes)();
         res.json({
             ok,
             totalActivos,
             activos,
             totalSupendidos,
             suspendidos,
+            totalVacaciones,
+            vacaciones,
             totalBaja,
             baja
         });
