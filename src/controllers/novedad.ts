@@ -7,6 +7,8 @@ const getNovedad =async (req:Request, res:Response) => {
     try {
         const {id} = req.params;
         const novedad = await mostrarNovedad(id);
+       
+       
         res.json({
             ok:true,
             novedad
