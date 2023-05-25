@@ -21,3 +21,9 @@ router.get('/:modelo/:busqueda', [
     validar_campos_1.validarCampos,
     log_1.logMiddlewares,
 ], search_1.searchModelo);
+router.post('/:modelo', [
+    validarJWT_1.validarToken,
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    validar_campos_1.validarCampos,
+    log_1.logMiddlewares,
+], search_1.searchModelofecha);

@@ -153,7 +153,7 @@ const searchColleccionDate = async (colleccion:string,fechainicial:any, fechafin
                         ]
                     } 
                 }
-            })
+            });
             break;
         case 'visita':
             data=await Visita.findAll({
@@ -195,8 +195,7 @@ const searchColleccionDate = async (colleccion:string,fechainicial:any, fechafin
             return {ok:false,msg:'Collecion no encontrada'};
     }
 
-    console.log(fechainicial, fechafinal)
-    console.log(data);
+    
     return data;
 }
 export {buscarTodo,searchColleccion,searchColleccionDate};
