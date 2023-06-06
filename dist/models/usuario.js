@@ -52,6 +52,10 @@ const Usuario = connection_1.default.define('T01_usuarios', {
         type: sequelize_1.DataTypes.STRING,
         defaultValue: 'USER_ROLE'
     },
+    online: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false
+    }
 }, {
     timestamps: true,
     scopes: {

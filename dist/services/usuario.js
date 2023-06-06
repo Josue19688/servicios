@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eliminarUsuario = exports.actualizarUsuario = exports.mostrarUsuarios = exports.mostrarUsuario = exports.insertarUsuario = void 0;
+exports.desconectarUsuarioSocket = exports.actualizaUsuarioSocket = exports.eliminarUsuario = exports.actualizarUsuario = exports.listarUsuariosSocket = exports.mostrarUsuarios = exports.mostrarUsuario = exports.insertarUsuario = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const usuario_1 = __importDefault(require("../models/usuario"));
 const insertarUsuario = (user) => __awaiter(void 0, void 0, void 0, function* () {
@@ -90,3 +90,59 @@ const eliminarUsuario = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return eliminado;
 });
 exports.eliminarUsuario = eliminarUsuario;
+/**
+ * Metodos para socket
+ */
+const actualizaUsuarioSocket = (id, estado) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const usuario = yield usuario_1.default.findByPk(id);
+        if (!usuario) {
+            return false;
+        }
+        yield usuario_1.default.update({
+            online: true
+        }, {
+            where: {
+                id: id
+            }
+        });
+        return true;
+    }
+    catch (error) {
+        return false;
+    }
+});
+exports.actualizaUsuarioSocket = actualizaUsuarioSocket;
+const desconectarUsuarioSocket = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const usuario = yield usuario_1.default.findByPk(id);
+        if (!usuario) {
+            return false;
+        }
+        yield usuario_1.default.update({
+            online: false
+        }, {
+            where: {
+                id: id
+            }
+        });
+        return true;
+    }
+    catch (error) {
+        return false;
+    }
+});
+exports.desconectarUsuarioSocket = desconectarUsuarioSocket;
+const listarUsuariosSocket = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const usuario = yield usuario_1.default.findAll({
+            where: {
+                online: true
+            }
+        });
+        return usuario;
+    }
+    catch (error) {
+    }
+});
+exports.listarUsuariosSocket = listarUsuariosSocket;

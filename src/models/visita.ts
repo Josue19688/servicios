@@ -26,6 +26,9 @@ const Visita = db.define('T01_visita',{
     proveniente:{
         type:DataTypes.STRING
     },
+    fecha:{
+        type:DataTypes.DATE
+    },
     ingreso:{
         type:DataTypes.TIME
     },
@@ -37,6 +40,10 @@ const Visita = db.define('T01_visita',{
     },
     vehiculo:{
         type:DataTypes.STRING
+    },
+    estado:{
+        type:DataTypes.BOOLEAN,
+        defaultValue:true
     },
     imagen:{
         type:DataTypes.STRING

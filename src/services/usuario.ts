@@ -109,4 +109,78 @@ const eliminarUsuario =async(id:string)=>{
     return eliminado;
 }
 
-export{insertarUsuario,mostrarUsuario,mostrarUsuarios, actualizarUsuario, eliminarUsuario};
+
+
+/**
+ * Metodos para socket
+ */
+
+
+const actualizaUsuarioSocket = async (id:string,estado:boolean) => {
+    try {
+        const usuario = await Usuario.findByPk(id);
+        if(!usuario){
+            return false;
+        }
+        await Usuario.update({
+            online:true
+        },{
+            where:{
+                id:id
+            }
+        })
+       
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+const desconectarUsuarioSocket = async (id:string) => {
+    try {
+        const usuario = await Usuario.findByPk(id);
+        if(!usuario){
+            return false;
+        }
+        await Usuario.update({
+            online:false
+        },{
+            where:{
+                id:id
+            }
+        })
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+
+const listarUsuariosSocket =async () => {
+    try {
+        const usuario = await Usuario.findAll({
+            where:{
+                online:true
+            }
+        })
+
+        return usuario;
+    } catch (error) {
+        
+    }
+    
+}
+
+
+
+
+export{
+    insertarUsuario,
+    mostrarUsuario,
+    mostrarUsuarios,
+    listarUsuariosSocket,
+     actualizarUsuario, 
+     eliminarUsuario,
+     actualizaUsuarioSocket,
+     desconectarUsuarioSocket
+    };

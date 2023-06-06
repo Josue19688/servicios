@@ -12,10 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.visitaUser = exports.eliminarVisita = exports.obtenerVisitas = exports.actualizarVisita = exports.insertarVisita = void 0;
+exports.obtenerVisitasSocket = exports.actualizarVisitaSocket = exports.visitaUser = exports.eliminarVisita = exports.obtenerVisitas = exports.actualizarVisita = exports.insertarVisita = void 0;
 const visita_1 = __importDefault(require("../models/visita"));
 const insertarVisita = (visita, userId) => __awaiter(void 0, void 0, void 0, function* () {
-    const { tipo, puesto, nombre, dpi, colaborador, proveniente, ingreso, salida, placa, vehiculo } = visita;
+    const { tipo, puesto, nombre, dpi, colaborador, proveniente, fecha, ingreso, salida, placa, vehiculo } = visita;
     const respuesta = yield visita_1.default.create({
         tipo: tipo,
         puesto: puesto,
@@ -23,6 +23,7 @@ const insertarVisita = (visita, userId) => __awaiter(void 0, void 0, void 0, fun
         dpi: dpi,
         colaborador: colaborador,
         proveniente: proveniente,
+        fecha: fecha,
         ingreso: ingreso,
         salida: salida,
         placa: placa,
@@ -33,7 +34,7 @@ const insertarVisita = (visita, userId) => __awaiter(void 0, void 0, void 0, fun
 });
 exports.insertarVisita = insertarVisita;
 const actualizarVisita = (id, visita) => __awaiter(void 0, void 0, void 0, function* () {
-    const { tipo, puesto, nombre, dpi, colaborador, proveniente, ingreso, salida, placa } = visita;
+    const { tipo, puesto, nombre, dpi, colaborador, proveniente, fecha, ingreso, salida, placa } = visita;
     const existeVisita = yield visita_1.default.findByPk(id);
     if (!existeVisita) {
         return { ok: false, msg: 'El registro no existe!' };
@@ -45,9 +46,11 @@ const actualizarVisita = (id, visita) => __awaiter(void 0, void 0, void 0, funct
         dpi: dpi,
         colaborador: colaborador,
         proveniente: proveniente,
+        fecha: fecha,
         ingreso: ingreso,
         salida: salida,
-        placa: placa
+        placa: placa,
+        estado: false
     }, {
         where: {
             id: id
@@ -56,6 +59,32 @@ const actualizarVisita = (id, visita) => __awaiter(void 0, void 0, void 0, funct
     return respuesta;
 });
 exports.actualizarVisita = actualizarVisita;
+const actualizarVisitaSocket = (id, visita) => __awaiter(void 0, void 0, void 0, function* () {
+    const { tipo, puesto, nombre, dpi, colaborador, proveniente, fecha, ingreso, salida, placa } = visita;
+    const existeVisita = yield visita_1.default.findByPk(id);
+    if (!existeVisita) {
+        return { ok: false, msg: 'El registro no existe!' };
+    }
+    const respuesta = yield visita_1.default.update({
+        tipo: tipo,
+        puesto: puesto,
+        nombre: nombre,
+        dpi: dpi,
+        colaborador: colaborador,
+        proveniente: proveniente,
+        fecha: fecha,
+        ingreso: ingreso,
+        salida: salida,
+        placa: placa,
+        estado: false
+    }, {
+        where: {
+            id: id
+        }
+    });
+    return respuesta;
+});
+exports.actualizarVisitaSocket = actualizarVisitaSocket;
 //TODO: OBTENET VISITAS POR ID DEL USUARIO
 const visitaUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const visitas = yield visita_1.default.findAll({
@@ -71,13 +100,11 @@ const visitaUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return { total, visitas };
 });
 exports.visitaUser = visitaUser;
-const obtenerVisitas = (limite, desde) => __awaiter(void 0, void 0, void 0, function* () {
+const obtenerVisitas = () => __awaiter(void 0, void 0, void 0, function* () {
     const visitas = yield visita_1.default.findAll({
         order: [
             ['id', 'DESC']
         ],
-        offset: desde,
-        limit: limite
     });
     if (!visitas) {
         return { ok: false, msg: 'El registro no existe!' };
@@ -86,6 +113,26 @@ const obtenerVisitas = (limite, desde) => __awaiter(void 0, void 0, void 0, func
     return { total, visitas };
 });
 exports.obtenerVisitas = obtenerVisitas;
+const obtenerVisitasSocket = () => __awaiter(void 0, void 0, void 0, function* () {
+    const visitas = yield visita_1.default.findAll({
+        order: [
+            ['id', 'DESC']
+        ],
+        where: {
+            estado: true
+        }
+    });
+    if (!visitas) {
+        return { ok: false, msg: 'El registro no existe!' };
+    }
+    const total = yield visita_1.default.count({
+        where: {
+            estado: true
+        }
+    });
+    return { total, visitas };
+});
+exports.obtenerVisitasSocket = obtenerVisitasSocket;
 const eliminarVisita = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const visita = yield visita_1.default.findByPk(id);
     if (!visita) {

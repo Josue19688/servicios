@@ -1,17 +1,59 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mensaje2 = void 0;
-// export const usuarioConectados=new UserList();
-// export const conectarClinte=(cliente:Socket,io:socketIO.Server)=>{
-//     const usuario = new Usuario(cliente.id);
-//     usuarioConectados.agregar(usuario);
-//     io.emit('usuarios-activos',usuarioConectados.getLista());
-// }
-// export const desconectar = (cliente:Socket,io:socketIO.Server)=>{
-//     cliente.on('disconnect',()=>{
-//         usuarioConectados.borrarUsuario(cliente.id);
-//     })
-// }
+const usuario_1 = require("../services/usuario");
+const jwtSocket_1 = require("../utils/jwtSocket");
+const visita_1 = require("../services/visita");
+const novedad_1 = require("../services/novedad");
+class Sockets {
+    constructor(io) {
+        this.io = io;
+        this.socketEvents();
+    }
+    socketEvents() {
+        this.io.on('connection', (socket) => __awaiter(this, void 0, void 0, function* () {
+            const token = socket.handshake.query['x-token'];
+            const [valido, id] = yield (0, jwtSocket_1.comprobarJWT)(token);
+            if (!valido) {
+                return socket.disconnect();
+            }
+            /**
+             * CONECTAMOS EL USUARIO YA IDENTIFICADO
+             */
+            yield (0, usuario_1.actualizaUsuarioSocket)(id, true);
+            socket.on('visita-nueva', (payload) => __awaiter(this, void 0, void 0, function* () {
+                yield (0, visita_1.insertarVisita)(payload, Number(id));
+                this.io.emit('listar-visitas', yield (0, visita_1.obtenerVisitasSocket)());
+            }));
+            socket.on('novedad-nueva', (payload) => __awaiter(this, void 0, void 0, function* () {
+                yield (0, novedad_1.insertarNovedad)(payload, Number(id));
+                this.io.emit('listar-novedades', yield (0, novedad_1.mostrarNovedades)());
+            }));
+            /**
+             * EMITIMOS TODOS LOS EVENTOS DE LISTADO DE DATOS
+             */
+            this.io.emit('listar-visitas', yield (0, visita_1.obtenerVisitasSocket)());
+            this.io.emit('listar-novedades', yield (0, novedad_1.mostrarNovedades)());
+            this.io.emit('lista-usuarios', yield (0, usuario_1.listarUsuariosSocket)());
+            /**
+             * DESCONECTAMOS AL USUARIO DEL SOCKET
+             */
+            socket.on('disconnect', () => __awaiter(this, void 0, void 0, function* () {
+                yield (0, usuario_1.desconectarUsuarioSocket)(id);
+                this.io.emit('lista-usuarios', yield (0, usuario_1.listarUsuariosSocket)());
+            }));
+        }));
+    }
+}
+exports.default = Sockets;
 //escuchar mensjaes
 // export const mensaje=(cliente:Socket, io:socketIO.Server)=>{
 //     cliente.on('mensaje',(payload:{de:string, cuerpo:string})=>{
@@ -21,24 +63,13 @@ exports.mensaje2 = void 0;
 //                 .catch(error=>console.log(error));
 //         io.emit('mensaje-nuevo',payload);
 //     })
-// }
+//}
 ///metodo socket para seguridad y su vista de datos en tiempo real 
 ////registro de ingreso de personal 
-const mensaje2 = (cliente, io) => {
-    cliente.on('mensaje2', (payload) => {
-        console.log('Mensaje recibido', payload); //esto nos trae el nombre de usuarios qeu dira presente
-        io.emit('mensaje2-nuevo', payload);
-    });
-};
-exports.mensaje2 = mensaje2;
-// export const loginWS=(cliente:Socket,io:socketIO.Server)=>{
-//     cliente.on('configurar-usuario',(payload:{nombre:string}, callback:Function)=>{
-//         usuarioConectados.actualizarNombre(cliente.id,payload.nombre);
-//         io.emit('usuarios-activos',usuarioConectados.getLista());
-//         callback({
-//             ok:true,
-//             mensaje:`Usuario ${payload.nombre}, configurado`
-//         })
+// export const mensaje2=(cliente:Socket, io:socketIO.Server)=>{
+//     cliente.on('mensaje2',(payload:{de:string, cuerpo:string})=>{
+//         console.log('Mensaje recibido', payload);//esto nos trae el nombre de usuarios qeu dira presente
+//         io.emit('mensaje2-nuevo',payload);
 //     })
 // }
 //obtener usuarios para cuando entramos nos cargue toda la lista
@@ -46,4 +77,4 @@ exports.mensaje2 = mensaje2;
 //     cliente.on('obtener-usuarios',()=>{
 //         io.to(cliente.id).emit('usuarios-activos',usuarioConectados.getLista());
 //     })
-// }
+//}

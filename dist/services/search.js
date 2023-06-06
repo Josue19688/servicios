@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchColleccion = exports.buscarTodo = void 0;
+exports.searchColleccionDate = exports.searchColleccion = exports.buscarTodo = void 0;
 const sequelize_1 = require("sequelize");
 const usuario_1 = __importDefault(require("../models/usuario"));
 const novedad_1 = __importDefault(require("../models/novedad"));
@@ -119,3 +119,81 @@ const searchColleccion = (colleccion, search) => __awaiter(void 0, void 0, void 
     return data;
 });
 exports.searchColleccion = searchColleccion;
+// case 'medicos':
+//     data = await Medico.find({ nombre: regex })
+//                         .populate('usuario', 'nombre img')
+//                         .populate('hospital', 'nombre img');
+// break;
+// case 'hospitales':
+//     data = await Hospital.find({ nombre: regex })
+//                             .populate('usuario', 'nombre img');
+// break;
+const searchColleccionDate = (colleccion, fechainicial, fechafinal, id) => __awaiter(void 0, void 0, void 0, function* () {
+    let data = [];
+    switch (colleccion) {
+        case 'usuario':
+            data = yield usuario_1.default.scope('withoutPassword').findAll({
+                where: {
+                    createdAt: {
+                        [sequelize_1.Op.between]: [fechainicial + ' 00:00:00', fechafinal + ' 23:59:59']
+                    }
+                }
+            });
+            break;
+        case 'novedad':
+            data = yield novedad_1.default.findAll({
+                where: {
+                    createdAt: {
+                        [sequelize_1.Op.and]: [
+                            {
+                                [sequelize_1.Op.gt]: new Date(fechainicial).toISOString(),
+                                [sequelize_1.Op.lt]: new Date(`${fechafinal} 23:59:59`).toISOString(),
+                            }
+                        ]
+                    }
+                }
+            });
+            break;
+        case 'visita':
+            data = yield visita_1.default.findAll({
+                where: {
+                    createdAt: {
+                        [sequelize_1.Op.between]: [fechainicial + ' 00:00:00', fechafinal + ' 23:59:59']
+                    },
+                    T01UsuarioId: `${id}`
+                }
+            });
+            break;
+        case 'archivo':
+            data = yield archivo_1.default.findAll({
+                where: {
+                    createdAt: {
+                        [sequelize_1.Op.between]: [fechainicial + ' 00:00:00', fechafinal + ' 23:59:59']
+                    }
+                }
+            });
+            break;
+        case 'ingreso':
+            data = yield ingresos_1.default.findAll({
+                where: {
+                    createdAt: {
+                        [sequelize_1.Op.between]: [fechainicial + ' 00:00:00', fechafinal + ' 23:59:59']
+                    }
+                }
+            });
+            break;
+        case 'vehiculo':
+            data = yield vehiculo_1.default.findAll({
+                where: {
+                    createdAt: {
+                        [sequelize_1.Op.between]: [fechainicial + ' 00:00:00', fechafinal + ' 23:59:59']
+                    }
+                }
+            });
+            break;
+        default:
+            return { ok: false, msg: 'Collecion no encontrada' };
+    }
+    return data;
+});
+exports.searchColleccionDate = searchColleccionDate;

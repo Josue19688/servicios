@@ -45,7 +45,6 @@ router.put('/:id', [
     (0, express_validator_1.check)('nombre', 'La nombre es obligatoria').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('unidad', 'La unidad es obligatoria').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('rol', 'La rol es obligatoria').not().isEmpty().trim().escape(),
-    (0, express_validator_1.check)('rol').custom(db_validators_1.esRoleValido),
     validar_campos_1.validarCampos,
     log_1.logMiddlewares
 ], usuario_1.updateUsuario);

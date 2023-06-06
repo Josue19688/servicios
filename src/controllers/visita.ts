@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { actualizarVisita, eliminarVisita, insertarVisita,  obtenerVisitas, visitaUser } from "../services/visita";
+import { actualizarVisita, eliminarVisita, insertarVisita,  obtenerVisitas, obtenerVisitasSocket, visitaUser } from "../services/visita";
 import { handleHttp } from "../utils/error.handler";
 
 
@@ -24,7 +24,21 @@ const postVisita =async (req:Request,res:Response) => {
 const getVisitas =async (req:Request,res:Response) => {
     try {
         const {limite=5,desde=0} = req.query;
-        const {total,visitas} = await obtenerVisitas( Number(limite), Number(desde));
+        const {total,visitas} = await obtenerVisitas( );
+        res.json({
+            ok:true,
+            total,
+            visitas
+        })
+        
+    } catch (error) {
+        handleHttp(res,'ERROR_GET_VISITAs');
+    }
+}
+
+const getVisitasSockets =async (req:Request,res:Response) => {
+    try {
+        const {total,visitas} = await obtenerVisitasSocket( );
         res.json({
             ok:true,
             total,
@@ -80,4 +94,4 @@ const deleteVisita =async (req:Request,res:Response) => {
 }
 
 
-export {postVisita,getVisitas,putVisita,deleteVisita,visitasUsuarios};
+export {postVisita,getVisitas,putVisita,deleteVisita,visitasUsuarios,getVisitasSockets};

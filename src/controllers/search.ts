@@ -33,9 +33,9 @@ const searchModelo =async (req:Request,res:Response) => {
 const searchModelofecha =async (req:Request,res:Response) => {
     try {
         const {modelo}= req.params;
-        const {inicio,final}=req.body;
+        const {inicio,final,usuario}=req.body;
         
-        const resultado=await searchColleccionDate(modelo,inicio,final);
+        const resultado=await searchColleccionDate(modelo,inicio,final,usuario);
         res.json({
             ok:true,
             resultado

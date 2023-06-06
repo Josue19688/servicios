@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { check } from "express-validator";
-import { deleteVisita,  getVisitas, postVisita, putVisita, visitasUsuarios } from "../controllers/visita";
+import { deleteVisita,  getVisitas, getVisitasSockets, postVisita, putVisita, visitasUsuarios } from "../controllers/visita";
 import { logMiddlewares } from "../middlewares/log";
 import { esAdminRol, tieneRol } from "../middlewares/validar-roles";
 import { validarCampos } from "../utils/validar-campos";
@@ -17,6 +17,12 @@ router.get('/',[
     validarCampos,
     logMiddlewares,
 ],getVisitas);
+router.get('/socket',[
+    validarToken,
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    validarCampos,
+    logMiddlewares,
+],getVisitasSockets);
 router.post('/',[
     validarToken,
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
@@ -39,8 +45,6 @@ router.put('/:id',[
     tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
     check('id','El id es obligatorio').not().isEmpty().trim().escape(),
     check('tipo','El tipo es obligatorio').not().isEmpty().trim().escape(),
-    check('dpi','El dpi es obligatorio').not().isEmpty().trim().escape(),
-    check('colaborador','El colaborador es obligatorio').not().isEmpty().trim().escape(),
     check('proveniente','El proveniente es obligatorio').not().isEmpty().trim().escape(),
     check('ingreso','La hora de ingreso es obligatoria').not().isEmpty().trim().escape(),
     check('salida','La hora de salida es obligatoria').not().isEmpty().trim().escape(),

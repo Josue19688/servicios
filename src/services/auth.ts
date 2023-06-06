@@ -9,7 +9,7 @@ const loginUsuario =async (userLogin:AuthInterface) => {
     
     const {correo, contrasena} =  userLogin;
 
-
+    
     const user = await Usuario.findOne({
         where:{
             correo:correo

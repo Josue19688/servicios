@@ -126,7 +126,7 @@ const searchColleccion = async (colleccion:string,search:string) => {
         //                             .populate('usuario', 'nombre img');
         // break;
 
-const searchColleccionDate = async (colleccion:string,fechainicial:any, fechafinal:any) => {
+const searchColleccionDate = async (colleccion:string,fechainicial:any, fechafinal:any,id:any) => {
     let data:any[] = [];
 
     switch(colleccion){
@@ -153,14 +153,15 @@ const searchColleccionDate = async (colleccion:string,fechainicial:any, fechafin
                         ]
                     } 
                 }
-            })
+            });
             break;
         case 'visita':
             data=await Visita.findAll({
                 where:{
                     createdAt:{
                         [Op.between]:[fechainicial+' 00:00:00',fechafinal+' 23:59:59']
-                    } 
+                    },
+                    T01UsuarioId:`${id}`
                 }
             })
             break;
@@ -195,8 +196,7 @@ const searchColleccionDate = async (colleccion:string,fechainicial:any, fechafin
             return {ok:false,msg:'Collecion no encontrada'};
     }
 
-    console.log(fechainicial, fechafinal)
-    console.log(data);
+    
     return data;
 }
 export {buscarTodo,searchColleccion,searchColleccionDate};

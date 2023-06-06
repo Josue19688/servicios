@@ -6,6 +6,7 @@ import http from 'http';
 
 //import * as socket from '../sockets/sockets';
 import db from '../mysql/connection';
+import Sockets from '../sockets/sockets';
 
 
 export default class ServerSocket{
@@ -25,7 +26,7 @@ export default class ServerSocket{
         this.httpServer=new http.Server(this.app);
         this.io = new Server(this.httpServer,{
             cors: {
-              origin: ["xxxxxxxxxxx","xxxxxxxxxxxxx"],
+              origin: ["http://localhost:4200"],
               allowedHeaders: ["my-custom-header"],
               credentials: true
             }
@@ -51,37 +52,9 @@ export default class ServerSocket{
     }
 
     private escucharSockets(){
-       
-
-        this.io.on('connection',cliente=>{
-            /**
-             * Configurar usuario
-             */
-
-            // socket.conectarClinte(cliente,this.io);
-            //  socket.loginWS(cliente,this.io);
-
-
-            //obtener usuarios activos
-            //socket.obtenerUsuarios(cliente, this.io);
-
-
-
-
-            //aqui iran todos los metodos que quiero emitir 
-            //o escuchar de los sockets
-            // socket.desconectar(cliente,this.io);
-            // socket.mensaje(cliente,this.io);
-            // socket.mensaje2(cliente,this.io);
-          
-
-
-        })
+       new Sockets(this.io);
     }
 
-
-
-  
 
     start(callback:any){
         this.httpServer.listen(this.port,callback);

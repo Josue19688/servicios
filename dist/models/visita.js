@@ -29,6 +29,9 @@ const Visita = connection_1.default.define('T01_visita', {
     proveniente: {
         type: sequelize_1.DataTypes.STRING
     },
+    fecha: {
+        type: sequelize_1.DataTypes.DATE
+    },
     ingreso: {
         type: sequelize_1.DataTypes.TIME
     },
@@ -40,6 +43,10 @@ const Visita = connection_1.default.define('T01_visita', {
     },
     vehiculo: {
         type: sequelize_1.DataTypes.STRING
+    },
+    estado: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: true
     },
     imagen: {
         type: sequelize_1.DataTypes.STRING

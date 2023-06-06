@@ -16,6 +16,12 @@ router.get('/', [
     validar_campos_1.validarCampos,
     log_1.logMiddlewares,
 ], visita_1.getVisitas);
+router.get('/socket', [
+    validarJWT_1.validarToken,
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    validar_campos_1.validarCampos,
+    log_1.logMiddlewares,
+], visita_1.getVisitasSockets);
 router.post('/', [
     validarJWT_1.validarToken,
     (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
@@ -37,8 +43,6 @@ router.put('/:id', [
     (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
     (0, express_validator_1.check)('id', 'El id es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('tipo', 'El tipo es obligatorio').not().isEmpty().trim().escape(),
-    (0, express_validator_1.check)('dpi', 'El dpi es obligatorio').not().isEmpty().trim().escape(),
-    (0, express_validator_1.check)('colaborador', 'El colaborador es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('proveniente', 'El proveniente es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('ingreso', 'La hora de ingreso es obligatoria').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('salida', 'La hora de salida es obligatoria').not().isEmpty().trim().escape(),

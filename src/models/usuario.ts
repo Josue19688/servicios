@@ -49,6 +49,10 @@ const Usuario = db.define('T01_usuarios',{
         type:DataTypes.STRING,
         defaultValue:'USER_ROLE'
     },
+    online:{
+        type:DataTypes.BOOLEAN,
+        defaultValue:false
+    }
 },{
     timestamps: true,
     scopes: {

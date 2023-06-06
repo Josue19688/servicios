@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.visitasUsuarios = exports.deleteVisita = exports.putVisita = exports.getVisitas = exports.postVisita = void 0;
+exports.getVisitasSockets = exports.visitasUsuarios = exports.deleteVisita = exports.putVisita = exports.getVisitas = exports.postVisita = void 0;
 const visita_1 = require("../services/visita");
 const error_handler_1 = require("../utils/error.handler");
 const postVisita = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -30,7 +30,7 @@ exports.postVisita = postVisita;
 const getVisitas = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { limite = 5, desde = 0 } = req.query;
-        const { total, visitas } = yield (0, visita_1.obtenerVisitas)(Number(limite), Number(desde));
+        const { total, visitas } = yield (0, visita_1.obtenerVisitas)();
         res.json({
             ok: true,
             total,
@@ -42,6 +42,20 @@ const getVisitas = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.getVisitas = getVisitas;
+const getVisitasSockets = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { total, visitas } = yield (0, visita_1.obtenerVisitasSocket)();
+        res.json({
+            ok: true,
+            total,
+            visitas
+        });
+    }
+    catch (error) {
+        (0, error_handler_1.handleHttp)(res, 'ERROR_GET_VISITAs');
+    }
+});
+exports.getVisitasSockets = getVisitasSockets;
 const visitasUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;

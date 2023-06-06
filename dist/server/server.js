@@ -18,6 +18,7 @@ const socket_io_1 = require("socket.io");
 const http_1 = __importDefault(require("http"));
 //import * as socket from '../sockets/sockets';
 const connection_1 = __importDefault(require("../mysql/connection"));
+const sockets_1 = __importDefault(require("../sockets/sockets"));
 class ServerSocket {
     constructor() {
         this.app = (0, express_1.default)();
@@ -25,7 +26,7 @@ class ServerSocket {
         this.httpServer = new http_1.default.Server(this.app);
         this.io = new socket_io_1.Server(this.httpServer, {
             cors: {
-                origin: ["xxxxxxxxxxx", "xxxxxxxxxxxxx"],
+                origin: ["http://localhost:4200"],
                 allowedHeaders: ["my-custom-header"],
                 credentials: true
             }
@@ -50,20 +51,7 @@ class ServerSocket {
         return this._instance || (this._instance = new this());
     }
     escucharSockets() {
-        this.io.on('connection', cliente => {
-            /**
-             * Configurar usuario
-             */
-            // socket.conectarClinte(cliente,this.io);
-            //  socket.loginWS(cliente,this.io);
-            //obtener usuarios activos
-            //socket.obtenerUsuarios(cliente, this.io);
-            //aqui iran todos los metodos que quiero emitir 
-            //o escuchar de los sockets
-            // socket.desconectar(cliente,this.io);
-            // socket.mensaje(cliente,this.io);
-            // socket.mensaje2(cliente,this.io);
-        });
+        new sockets_1.default(this.io);
     }
     start(callback) {
         this.httpServer.listen(this.port, callback);

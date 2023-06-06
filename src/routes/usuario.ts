@@ -46,7 +46,6 @@ router.put('/:id',[
     check('nombre','La nombre es obligatoria').not().isEmpty().trim().escape(),
     check('unidad','La unidad es obligatoria').not().isEmpty().trim().escape(),
     check('rol','La rol es obligatoria').not().isEmpty().trim().escape(),
-    check('rol').custom(esRoleValido),
     validarCampos,
     logMiddlewares
 ],updateUsuario);
