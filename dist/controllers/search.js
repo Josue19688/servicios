@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchModelofecha = exports.searchModelo = exports.searchModel = void 0;
+exports.searchModelofechaGeneral = exports.searchModelofecha = exports.searchModelo = exports.searchModel = void 0;
 const error_handler_1 = require("../utils/error.handler");
 const search_1 = require("../services/search");
 const searchModel = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -55,3 +55,18 @@ const searchModelofecha = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.searchModelofecha = searchModelofecha;
+const searchModelofechaGeneral = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { modelo } = req.params;
+        const { inicio, final } = req.body;
+        const resultado = yield (0, search_1.searchColleccionDateGeneral)(modelo, inicio, final);
+        res.json({
+            ok: true,
+            resultado
+        });
+    }
+    catch (error) {
+        (0, error_handler_1.handleHttp)(res, 'ERROR_SEARCH_COLLECTION_REPORTERIA');
+    }
+});
+exports.searchModelofechaGeneral = searchModelofechaGeneral;

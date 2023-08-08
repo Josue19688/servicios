@@ -13,13 +13,13 @@ const router=Router();
 
 router.get('/',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFEADMIN_ROLE'),
     validarCampos,
     logMiddlewares,
 ],getVisitas);
 router.get('/socket',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFEADMIN_ROLE'),
     validarCampos,
     logMiddlewares,
 ],getVisitasSockets);
@@ -36,7 +36,7 @@ router.post('/',[
 ],postVisita);
 router.get('/:id',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFEADMIN_ROLE'),
     logMiddlewares
 ],visitasUsuarios);
 
@@ -53,7 +53,7 @@ router.put('/:id',[
 ],putVisita);
 router.delete('/:id',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFEADMIN_ROLE'),
     esAdminRol,
     check('id','El id es obligatorio').not().isEmpty().trim().escape(),
     validarCampos,

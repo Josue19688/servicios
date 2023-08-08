@@ -12,12 +12,12 @@ const router = (0, express_1.Router)();
 exports.router = router;
 router.get('/', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     log_1.logMiddlewares
 ], ingreso_1.obtenerRegistros);
 router.post('/', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     (0, express_validator_1.check)('codigo', 'El codigo es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('status', 'El status es obligatorio').not().isEmpty().trim().escape(),
     validar_campos_1.validarCampos,
@@ -25,7 +25,7 @@ router.post('/', [
 ], ingreso_1.crear);
 router.put('/:id', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     (0, express_validator_1.check)('codigo', 'El codigo es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('status', 'El status es obligatorio').not().isEmpty().trim().escape(),
     validar_campos_1.validarCampos,
@@ -33,7 +33,7 @@ router.put('/:id', [
 ], ingreso_1.actualizar);
 router.delete('/:id', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE'),
     validar_campos_1.validarCampos,
     log_1.logMiddlewares
 ], ingreso_1.actualizar);

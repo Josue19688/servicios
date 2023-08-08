@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { handleHttp } from "../utils/error.handler";
-import { buscarTodo, searchColleccion, searchColleccionDate } from "../services/search";
+import { buscarTodo, searchColleccion, searchColleccionDate, searchColleccionDateGeneral } from "../services/search";
 
 
 const searchModel=async (req:Request,res:Response) => {
@@ -45,5 +45,20 @@ const searchModelofecha =async (req:Request,res:Response) => {
     }
 }
 
+const searchModelofechaGeneral =async (req:Request,res:Response) => {
+    try {
+        const {modelo}= req.params;
+        const {inicio,final}=req.body;
+        
+        const resultado=await searchColleccionDateGeneral(modelo,inicio,final);
+        res.json({
+            ok:true,
+            resultado
+        })
+    } catch (error) {
+        handleHttp(res,'ERROR_SEARCH_COLLECTION_REPORTERIA');
+    }
+}
 
-export {searchModel,searchModelo,searchModelofecha};
+
+export {searchModel,searchModelo,searchModelofecha,searchModelofechaGeneral};

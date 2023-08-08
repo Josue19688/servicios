@@ -16,12 +16,12 @@ const router=Router();
 
 router.get('/',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFAADMIN_ROLE'),
     logMiddlewares
 ],obtenerRegistros);
 router.post('/',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFAADMIN_ROLE'),
     check('codigo','El codigo es obligatorio').not().isEmpty().trim().escape(),
     check('status','El status es obligatorio').not().isEmpty().trim().escape(),
     validarCampos,
@@ -30,7 +30,7 @@ router.post('/',[
 
 router.put('/:id',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFAADMIN_ROLE'),
     check('codigo','El codigo es obligatorio').not().isEmpty().trim().escape(),
     check('status','El status es obligatorio').not().isEmpty().trim().escape(),
     validarCampos,
@@ -38,7 +38,7 @@ router.put('/:id',[
 ],actualizar);
 router.delete('/:id',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE'),
     validarCampos,
     logMiddlewares
 ],actualizar);

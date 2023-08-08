@@ -12,12 +12,17 @@ const router = (0, express_1.Router)();
 exports.router = router;
 router.get('/', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     log_1.logMiddlewares
 ], agente_1.obtenerAgente);
+router.get('/agentes', [
+    validarJWT_1.validarToken,
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
+    log_1.logMiddlewares
+], agente_1.mostrarAgentes);
 router.post('/', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     (0, express_validator_1.check)('nombre', 'El nombre es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('dpi', 'El dpi es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('telefono', 'El telefono es obligatorio').not().isEmpty().trim().escape(),
@@ -35,13 +40,13 @@ router.post('/', [
 ], agente_1.crearAgente);
 router.put('/:id', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     validar_campos_1.validarCampos,
     log_1.logMiddlewares
 ], agente_1.updateAgente);
 router.delete('/:id', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE'),
     validar_roles_1.esAdminRol,
     validar_campos_1.validarCampos,
     log_1.logMiddlewares

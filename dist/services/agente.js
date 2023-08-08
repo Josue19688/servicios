@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eliminar = exports.getAgentes = exports.actualizar = exports.crear = void 0;
+exports.Agentes = exports.eliminar = exports.getAgentes = exports.actualizar = exports.crear = void 0;
 const agente_1 = __importDefault(require("../models/agente"));
 const crear = (agente, userId) => __awaiter(void 0, void 0, void 0, function* () {
     const { nombre, dpi, telefono, correo, nacimiento, direccion, igss, nit, sangre, puesto, grupo, status } = agente;
@@ -131,6 +131,15 @@ const getAgentes = () => __awaiter(void 0, void 0, void 0, function* () {
     };
 });
 exports.getAgentes = getAgentes;
+const Agentes = () => __awaiter(void 0, void 0, void 0, function* () {
+    const agentes = yield agente_1.default.findAll({
+        where: {
+            status: 1
+        }
+    });
+    return { ok: true, agentes };
+});
+exports.Agentes = Agentes;
 const eliminar = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const existeAgente = yield agente_1.default.findByPk(id);
     if (!existeAgente) {

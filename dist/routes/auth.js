@@ -18,6 +18,6 @@ router.post('/', [
 ], auth_1.login);
 router.get('/', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFEADMIN_ROLE'),
     log_1.logMiddlewares
 ], auth_1.renovarToken);

@@ -172,6 +172,19 @@ const getAgentes =async () => {
     };
 }
 
+
+const Agentes =async () => {
+    
+    
+    const agentes = await Agente.findAll({
+            where:{
+                status:1
+            }
+        })
+       
+    return {ok:true,agentes};
+}
+
 const eliminar =async (id:string) => {
     const existeAgente = await Agente.findByPk(id);
     if(!existeAgente){
@@ -189,4 +202,4 @@ const eliminar =async (id:string) => {
 
 
 
-export {crear, actualizar, getAgentes,eliminar};
+export {crear, actualizar, getAgentes,eliminar, Agentes};

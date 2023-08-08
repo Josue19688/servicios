@@ -14,12 +14,12 @@ const router=Router();
 
 router.get('/',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE'),
     logMiddlewares
 ],obtenerRegistro);
 router.post('/',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE'),
     check('piloto','El piloto es obligatorio').not().isEmpty().trim().escape(),
     check('vehiculo','La placa es obligatoria').not().isEmpty().trim().escape(),
     check('kmsalida','El km es obligatorio').not().isEmpty().trim().escape(),
@@ -29,14 +29,14 @@ router.post('/',[
 
 router.put('/:id',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE'),
     check('kmingreso','El km es obligatorio').not().isEmpty().trim().escape(),
     validarCampos,
     logMiddlewares
 ],update);
 router.delete('/:id',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE'),
     validarCampos,
     logMiddlewares
 ],deleteRegistro);

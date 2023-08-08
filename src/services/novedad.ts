@@ -1,7 +1,9 @@
 
 
 import { NovedadInterface } from "../interfaces/novedad.interface";
+import { botLogs } from "../middlewares/log";
 import Novedad from "../models/novedad";
+
 
 const insertarNovedad =async (novedad:NovedadInterface,userId:Number) => {
 
@@ -17,7 +19,9 @@ const insertarNovedad =async (novedad:NovedadInterface,userId:Number) => {
         descripcion,
     } = novedad;
 
-    console.log(novedad)
+    const data =`Tipo Novedad : ${tipo}, \nNombres : ${nombres}, \nPlacas : ${placa},\nHora :${hora},\nFecha : ${fecha},\nPuesto : ${puesto},\nPreliminar : ${preliminar},\nDescripcion:${descripcion}`;
+    
+    botLogs(data);
     
 
     const respuesta =  await Novedad.create({

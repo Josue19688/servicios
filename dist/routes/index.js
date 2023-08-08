@@ -34,10 +34,9 @@ const cleanFileName = (filename) => {
     return file;
 };
 (0, fs_1.readdirSync)(PATH_ROUTER).filter((filename) => {
-    var _a;
     const cleanName = cleanFileName(filename);
     if (cleanName !== 'index') {
-        (_a = `./${cleanName}`, Promise.resolve().then(() => __importStar(require(_a)))).then((moduleRouter) => {
+        Promise.resolve(`${`./${cleanName}`}`).then(s => __importStar(require(s))).then((moduleRouter) => {
             router.use(`/${cleanName}`, moduleRouter.router);
         });
     }

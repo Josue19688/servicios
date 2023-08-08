@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { handleHttp } from "../utils/error.handler";
-import { actualizar, crear, eliminar, getAgentes } from "../services/agente";
+import { Agentes, actualizar, crear, eliminar, getAgentes } from "../services/agente";
+
 
 const crearAgente =async (req:Request,res:Response) => {
     try {
@@ -58,6 +59,18 @@ const obtenerAgente =async (req:Request,res:Response) => {
     }
 }
 
+const mostrarAgentes = async (req:Request,res:Response) => {
+    try {
+        const {ok, agentes} = await Agentes();
+        res.json({
+            ok,
+            agentes
+        });
+    } catch (error) {
+        handleHttp(res,'ERROR_GET_AGENTES');
+    }
+}
+
 const eliminarAgente =async (req:Request,res:Response) => {
     try {
         const {id}=req.params;
@@ -72,4 +85,4 @@ const eliminarAgente =async (req:Request,res:Response) => {
 }
 
 
-export {crearAgente,updateAgente,obtenerAgente,eliminarAgente}
+export {crearAgente,updateAgente,obtenerAgente,eliminarAgente,mostrarAgentes}

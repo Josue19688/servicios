@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eliminarAgente = exports.obtenerAgente = exports.updateAgente = exports.crearAgente = void 0;
+exports.mostrarAgentes = exports.eliminarAgente = exports.obtenerAgente = exports.updateAgente = exports.crearAgente = void 0;
 const error_handler_1 = require("../utils/error.handler");
 const agente_1 = require("../services/agente");
 const crearAgente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -63,6 +63,19 @@ const obtenerAgente = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.obtenerAgente = obtenerAgente;
+const mostrarAgentes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { ok, agentes } = yield (0, agente_1.Agentes)();
+        res.json({
+            ok,
+            agentes
+        });
+    }
+    catch (error) {
+        (0, error_handler_1.handleHttp)(res, 'ERROR_GET_AGENTES');
+    }
+});
+exports.mostrarAgentes = mostrarAgentes;
 const eliminarAgente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;

@@ -12,13 +12,13 @@ const router = (0, express_1.Router)();
 exports.router = router;
 router.get('/', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     validar_campos_1.validarCampos,
     log_1.logMiddlewares
 ], archivo_1.getArchivos);
 router.post('/', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     (0, express_validator_1.check)('tipo', 'El tipo es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('numero', 'El numero es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('fecha', 'La fecha es obligatorio').not().isEmpty().trim().escape(),
@@ -30,14 +30,14 @@ router.post('/', [
 ], archivo_1.postArchivo);
 router.get('/:id', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     (0, express_validator_1.check)('id', 'El id es obligatorio').not().isEmpty().trim().escape(),
     validar_campos_1.validarCampos,
     log_1.logMiddlewares,
 ], archivo_1.getArchivo);
 router.put('/:id', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     (0, express_validator_1.check)('id', 'El id es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('tipo', 'El tipo es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('numero', 'El numero es obligatorio').not().isEmpty().trim().escape(),
@@ -50,7 +50,7 @@ router.put('/:id', [
 ], archivo_1.putArchivo);
 router.delete('/:id', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE'),
     validar_roles_1.esAdminRol,
     (0, express_validator_1.check)('id', 'El id es obligatorio').not().isEmpty().trim().escape(),
     validar_campos_1.validarCampos,

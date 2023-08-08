@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import db from "../mysql/connection";
+import Turno from "./turnos";
 
 
 const Agente = db.define('T10_Agente',{
@@ -62,5 +63,10 @@ const Agente = db.define('T10_Agente',{
 },{
     timestamps: true,
 });
+
+//Agente.hasMany(Turno,{foreignKey:'AgenteId'})
+(Agente as any).associate =  function(models:any){
+    Agente.hasMany(models.Turno,{foreignKey:'AgenteId'});
+}
 
 export default Agente;

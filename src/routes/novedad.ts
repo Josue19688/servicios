@@ -15,12 +15,12 @@ const router=Router();
 
 router.get('/',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFEADMIN_ROLE'),
     logMiddlewares
 ],getNovedades);
 router.post('/',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFEADMIN_ROLE'),
     check('tipo','El tipo es obligatorio').not().isEmpty().trim().escape(),
     check('hora','La hora es obligatoria').not().isEmpty().trim().escape(),
     check('fecha','La fecha es obligatoria').not().isEmpty().trim().escape(),
@@ -31,14 +31,14 @@ router.post('/',[
 ],postNovedad);
 router.get('/:id',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFEADMIN_ROLE'),
     check('id','La id es obligatorio').not().isEmpty().trim().escape(),
     validarCampos,
     logMiddlewares
 ],getNovedad);
 router.put('/:id',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFEADMIN_ROLE'),
     check('id','La id es obligatorio').not().isEmpty().trim().escape(),
     check('tipo','El tipo es obligatorio').not().isEmpty().trim().escape(),
     check('hora','La hora es obligatoria').not().isEmpty().trim().escape(),
@@ -50,7 +50,7 @@ router.put('/:id',[
 ],updateNovedad);
 router.delete('/:id',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE'),
     esAdminRol,
     check('id','La id es obligatorio').not().isEmpty().trim().escape(),
     validarCampos,

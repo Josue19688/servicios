@@ -13,10 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarNovedad = exports.mostrarNovedades = exports.mostrarNovedad = exports.actualizarNovedad = exports.insertarNovedad = void 0;
+const log_1 = require("../middlewares/log");
 const novedad_1 = __importDefault(require("../models/novedad"));
 const insertarNovedad = (novedad, userId) => __awaiter(void 0, void 0, void 0, function* () {
     const { tipo, nombres, placa, vehiculo, hora, fecha, puesto, preliminar, descripcion, } = novedad;
-    console.log(novedad);
+    const data = `Tipo Novedad : ${tipo}, \nNombres : ${nombres}, \nPlacas : ${placa},\nHora :${hora},\nFecha : ${fecha},\nPuesto : ${puesto},\nPreliminar : ${preliminar},\nDescripcion:${descripcion}`;
+    (0, log_1.botLogs)(data);
     const respuesta = yield novedad_1.default.create({
         tipo: tipo,
         nombres: nombres,

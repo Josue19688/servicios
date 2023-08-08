@@ -14,8 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.obtenerVisitasSocket = exports.actualizarVisitaSocket = exports.visitaUser = exports.eliminarVisita = exports.obtenerVisitas = exports.actualizarVisita = exports.insertarVisita = void 0;
 const visita_1 = __importDefault(require("../models/visita"));
+const log_1 = require("../middlewares/log");
 const insertarVisita = (visita, userId) => __awaiter(void 0, void 0, void 0, function* () {
     const { tipo, puesto, nombre, dpi, colaborador, proveniente, fecha, ingreso, salida, placa, vehiculo } = visita;
+    const data = `Tipo Visita : ${tipo}, \nPuesto : ${puesto}, \nNombres : ${nombre},\nDpi :${dpi},\nColaborador : ${colaborador},\nFecha : ${fecha},\nHora Ingreso : ${ingreso},\nPlacas :${placa},\nDescripcion:${proveniente}`;
+    (0, log_1.botLogs)(data);
     const respuesta = yield visita_1.default.create({
         tipo: tipo,
         puesto: puesto,

@@ -1,7 +1,8 @@
-import model from "sequelize/types/model";
+
 import { VisitaInterface } from "../interfaces/visita.interfaz";
-import Usuario from "../models/usuario";
 import Visita from "../models/visita";
+import { botLogs } from "../middlewares/log";
+
 
 const insertarVisita =async (visita:VisitaInterface,userId:Number) => {
     const {
@@ -18,6 +19,9 @@ const insertarVisita =async (visita:VisitaInterface,userId:Number) => {
         vehiculo
     } = visita;
 
+    const data =`Tipo Visita : ${tipo}, \nPuesto : ${puesto}, \nNombres : ${nombre},\nDpi :${dpi},\nColaborador : ${colaborador},\nFecha : ${fecha},\nHora Ingreso : ${ingreso},\nPlacas :${placa},\nDescripcion:${proveniente}`;
+    
+    botLogs(data);
     const respuesta = await Visita.create({
         tipo:tipo,
         puesto:puesto,

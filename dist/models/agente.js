@@ -65,4 +65,8 @@ const Agente = connection_1.default.define('T10_Agente', {
 }, {
     timestamps: true,
 });
+//Agente.hasMany(Turno,{foreignKey:'AgenteId'})
+Agente.associate = function (models) {
+    Agente.hasMany(models.Turno, { foreignKey: 'AgenteId' });
+};
 exports.default = Agente;

@@ -7,7 +7,7 @@ import { esAdminRol, tieneRol } from "../middlewares/validar-roles";
 import { validarCampos } from "../utils/validar-campos";
 
 import { validarToken } from "../utils/validarJWT";
-import { crearAgente, eliminarAgente, obtenerAgente, updateAgente } from "../controllers/agente";
+import { crearAgente, eliminarAgente, mostrarAgentes, obtenerAgente, updateAgente } from "../controllers/agente";
 
 
 const router=Router();
@@ -15,12 +15,19 @@ const router=Router();
 
 router.get('/',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFAADMIN_ROLE'),
     logMiddlewares
 ],obtenerAgente);
+
+router.get('/agentes',[
+    validarToken,
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFAADMIN_ROLE'),
+    logMiddlewares
+],mostrarAgentes);
+
 router.post('/',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFAADMIN_ROLE'),
     check('nombre','El nombre es obligatorio').not().isEmpty().trim().escape(),
     check('dpi','El dpi es obligatorio').not().isEmpty().trim().escape(),
     check('telefono','El telefono es obligatorio').not().isEmpty().trim().escape(),
@@ -39,13 +46,14 @@ router.post('/',[
 
 router.put('/:id',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFAADMIN_ROLE'),
     validarCampos,
     logMiddlewares
 ],updateAgente);
+
 router.delete('/:id',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE'),
     esAdminRol,
     validarCampos,
     logMiddlewares

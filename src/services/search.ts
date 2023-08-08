@@ -115,18 +115,103 @@ const searchColleccion = async (colleccion:string,search:string) => {
     return data;
 }
 
- // case 'medicos':
-        //     data = await Medico.find({ nombre: regex })
-        //                         .populate('usuario', 'nombre img')
-        //                         .populate('hospital', 'nombre img');
-        // break;
-
-        // case 'hospitales':
-        //     data = await Hospital.find({ nombre: regex })
-        //                             .populate('usuario', 'nombre img');
-        // break;
-
+ 
+/**
+ * Busqueda para reporteria mandandole fechas y por usuario
+ * @param colleccion 
+ * @param fechainicial 
+ * @param fechafinal 
+ * @param id 
+ * @returns coleccion de modelos
+ */
 const searchColleccionDate = async (colleccion:string,fechainicial:any, fechafinal:any,id:any) => {
+    let data:any[] = [];
+
+    switch(colleccion){
+        case 'usuario':
+            data = await Usuario.scope('withoutPassword').findAll({
+                where:{
+                    createdAt:{
+                        [Op.between]:[fechainicial+' 00:00:00',fechafinal+' 23:59:59']
+                    },
+                    T01UsuarioId:`${id}`
+                }
+            })
+           
+            break;
+        case 'novedad':
+            data=await Novedad.findAll({
+                where:{
+                    createdAt:{
+                        [Op.and]: [
+                            {
+                                [Op.gt]: new Date(fechainicial).toISOString(),
+                                [Op.lt]: new Date(`${fechafinal} 23:59:59`).toISOString(),
+                              
+                            }
+                        ]
+                    },
+                    T01UsuarioId:`${id}`
+                }
+            });
+            break;
+        case 'visita':
+            data=await Visita.findAll({
+                where:{
+                    createdAt:{
+                        [Op.between]:[fechainicial+' 00:00:00',fechafinal+' 23:59:59']
+                    },
+                    T01UsuarioId:`${id}`
+                }
+            })
+            break;
+        case 'archivo':
+            data=await Archivo.findAll({
+                where:{
+                    createdAt:{
+                        [Op.between]:[fechainicial+' 00:00:00',fechafinal+' 23:59:59']
+                    },
+                    T01UsuarioId:`${id}`
+                },
+                
+            })
+            break;
+        case 'ingreso':
+            data=await Ingreso.findAll({
+                where:{
+                    createdAt:{
+                        [Op.between]:[fechainicial+' 00:00:00',fechafinal+' 23:59:59']
+                    },
+                    T01UsuarioId:`${id}` 
+                }
+            })
+            break;
+        case 'vehiculo':
+            data=await Vehiculo.findAll({
+                where:{
+                    createdAt:{
+                        [Op.between]:[fechainicial+' 00:00:00',fechafinal+' 23:59:59']
+                    },
+                    T01UsuarioId:`${id}` 
+                }
+            })
+            break;
+        default:
+            return {ok:false,msg:'Collecion no encontrada'};
+    }
+
+    
+    return data;
+}
+
+/**
+ * Busqueda general solo para el departamento de seguridad pueda crear sus reportes
+ * @param colleccion 
+ * @param fechainicial 
+ * @param fechafinal 
+ * @returns Coleccion de modelos 
+ */
+const searchColleccionDateGeneral = async (colleccion:string,fechainicial:any, fechafinal:any) => {
     let data:any[] = [];
 
     switch(colleccion){
@@ -161,7 +246,7 @@ const searchColleccionDate = async (colleccion:string,fechainicial:any, fechafin
                     createdAt:{
                         [Op.between]:[fechainicial+' 00:00:00',fechafinal+' 23:59:59']
                     },
-                    T01UsuarioId:`${id}`
+                   
                 }
             })
             break;
@@ -199,4 +284,4 @@ const searchColleccionDate = async (colleccion:string,fechainicial:any, fechafin
     
     return data;
 }
-export {buscarTodo,searchColleccion,searchColleccionDate};
+export {buscarTodo,searchColleccion,searchColleccionDate,searchColleccionDateGeneral};

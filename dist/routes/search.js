@@ -11,19 +11,25 @@ const router = (0, express_1.Router)();
 exports.router = router;
 router.get('/:busqueda', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     validar_campos_1.validarCampos,
     log_1.logMiddlewares,
 ], search_1.searchModel);
 router.get('/:modelo/:busqueda', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     validar_campos_1.validarCampos,
     log_1.logMiddlewares,
 ], search_1.searchModelo);
 router.post('/:modelo', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
     validar_campos_1.validarCampos,
     log_1.logMiddlewares,
 ], search_1.searchModelofecha);
+router.post('/general/:modelo', [
+    validarJWT_1.validarToken,
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFAADMIN_ROLE'),
+    validar_campos_1.validarCampos,
+    log_1.logMiddlewares,
+], search_1.searchModelofechaGeneral);

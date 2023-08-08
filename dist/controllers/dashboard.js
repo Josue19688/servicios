@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getData = void 0;
+exports.getGroup = exports.getGeneralData = exports.getGeneral = exports.getData = void 0;
 const error_handler_1 = require("../utils/error.handler");
 const dashboard_1 = require("../services/dashboard");
 const getData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -28,3 +28,50 @@ const getData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getData = getData;
+const getGeneral = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { inicio, final } = req.params;
+        const { usuario, novedad, visita, archivo, agente } = yield (0, dashboard_1.getDataGeneral)(inicio, final);
+        res.json({
+            usuario,
+            novedad,
+            visita,
+            archivo,
+            agente
+        });
+    }
+    catch (error) {
+        (0, error_handler_1.handleHttp)(res, 'ERROR_GET_DATA_GENERAL');
+    }
+});
+exports.getGeneral = getGeneral;
+const getGeneralData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { usuario, novedad, visita, archivo, agente } = yield (0, dashboard_1.getGeneralDatos)();
+        res.json({
+            usuario,
+            novedad,
+            visita,
+            archivo,
+            agente
+        });
+    }
+    catch (error) {
+        (0, error_handler_1.handleHttp)(res, 'ERROR_GET_DATA_GENERAL');
+    }
+});
+exports.getGeneralData = getGeneralData;
+const getGroup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { inicio, final } = req.params;
+        const { novedad, visita } = yield (0, dashboard_1.getGroupBy)(inicio, final);
+        res.json({
+            novedad,
+            visita
+        });
+    }
+    catch (error) {
+        (0, error_handler_1.handleHttp)(res, 'ERROR_GET_DATA_GROUP');
+    }
+});
+exports.getGroup = getGroup;

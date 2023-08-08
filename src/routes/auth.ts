@@ -20,7 +20,7 @@ router.post('/',[
 
 router.get('/',[
     validarToken,
-    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE'),
+    tieneRol('ADMIN_ROLE','USER_ROLE','AGENTE_ROLE','ASISTENTE_ROLE','ENCARGADO_ROLE','JEFESEGURIDAD_ROLE','JEFEADMIN_ROLE'),
     logMiddlewares
 ],renovarToken);
 export {router};

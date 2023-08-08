@@ -5,10 +5,12 @@ import cors from "cors";
 import morgan from 'morgan';
 import { router } from "./routes";
 import fileUpload from 'express-fileupload';
+import { contactoBot } from "./middlewares/log";
 
 
-
+contactoBot();
 const server = ServerSocket.instance;
+
 server.app.use(bodyparser.urlencoded({ extended: false }));
 server.app.use(bodyparser.json())
 server.app.use(cors());

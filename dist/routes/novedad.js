@@ -12,12 +12,12 @@ const router = (0, express_1.Router)();
 exports.router = router;
 router.get('/', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFEADMIN_ROLE'),
     log_1.logMiddlewares
 ], novedad_1.getNovedades);
 router.post('/', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFEADMIN_ROLE'),
     (0, express_validator_1.check)('tipo', 'El tipo es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('hora', 'La hora es obligatoria').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('fecha', 'La fecha es obligatoria').not().isEmpty().trim().escape(),
@@ -28,14 +28,14 @@ router.post('/', [
 ], novedad_1.postNovedad);
 router.get('/:id', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFEADMIN_ROLE'),
     (0, express_validator_1.check)('id', 'La id es obligatorio').not().isEmpty().trim().escape(),
     validar_campos_1.validarCampos,
     log_1.logMiddlewares
 ], novedad_1.getNovedad);
 router.put('/:id', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE', 'ASISTENTE_ROLE', 'ENCARGADO_ROLE', 'JEFESEGURIDAD_ROLE', 'JEFEADMIN_ROLE'),
     (0, express_validator_1.check)('id', 'La id es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('tipo', 'El tipo es obligatorio').not().isEmpty().trim().escape(),
     (0, express_validator_1.check)('hora', 'La hora es obligatoria').not().isEmpty().trim().escape(),
@@ -47,7 +47,7 @@ router.put('/:id', [
 ], novedad_1.updateNovedad);
 router.delete('/:id', [
     validarJWT_1.validarToken,
-    (0, validar_roles_1.tieneRol)('ADMIN_ROLE', 'USER_ROLE', 'AGENTE_ROLE'),
+    (0, validar_roles_1.tieneRol)('ADMIN_ROLE'),
     validar_roles_1.esAdminRol,
     (0, express_validator_1.check)('id', 'La id es obligatorio').not().isEmpty().trim().escape(),
     validar_campos_1.validarCampos,
