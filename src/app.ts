@@ -8,7 +8,7 @@ import fileUpload from 'express-fileupload';
 import { contactoBot } from "./middlewares/log";
 
 
-contactoBot();
+//contactoBot();
 const server = ServerSocket.instance;
 
 server.app.use(bodyparser.urlencoded({ extended: false }));
