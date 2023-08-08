@@ -10,6 +10,7 @@ const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
 const routes_1 = require("./routes");
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
+// import { contactoBot } from "./middlewares/log";
 //contactoBot();
 const server = server_1.default.instance;
 server.app.use(body_parser_1.default.urlencoded({ extended: false }));

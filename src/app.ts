@@ -5,7 +5,7 @@ import cors from "cors";
 import morgan from 'morgan';
 import { router } from "./routes";
 import fileUpload from 'express-fileupload';
-import { contactoBot } from "./middlewares/log";
+// import { contactoBot } from "./middlewares/log";
 
 
 //contactoBot();

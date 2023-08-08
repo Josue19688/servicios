@@ -1,7 +1,7 @@
 
 import { VisitaInterface } from "../interfaces/visita.interfaz";
 import Visita from "../models/visita";
-import { botLogs } from "../middlewares/log";
+//import { botLogs } from "../middlewares/log";
 
 
 const insertarVisita =async (visita:VisitaInterface,userId:Number) => {
@@ -21,7 +21,7 @@ const insertarVisita =async (visita:VisitaInterface,userId:Number) => {
 
     const data =`Tipo Visita : ${tipo}, \nPuesto : ${puesto}, \nNombres : ${nombre},\nDpi :${dpi},\nColaborador : ${colaborador},\nFecha : ${fecha},\nHora Ingreso : ${ingreso},\nPlacas :${placa},\nDescripcion:${proveniente}`;
     
-    botLogs(data);
+    //botLogs(data);
     const respuesta = await Visita.create({
         tipo:tipo,
         puesto:puesto,
